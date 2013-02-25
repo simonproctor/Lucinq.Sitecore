@@ -18,44 +18,36 @@ Example Syntax
 
 Further examples can be found in the integration tests, however here is a quick overview of how the syntax looks
 ```C#
-LuceneSearch search = new LuceneSearch(indexPath));
+SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
 
 IQueryBuilder query = new QueryBuilder();
 
-query.Term("field", "value");
-query.Or
-	(
-		x => x.Term("_name", "work"),
-		x => x.Term("_name", "text")
-	);
+query.Name("itemname");
 
-LuceneSearchResult result = search.Execute(query.Build(), 20);	
-foreach (Document document in result.GetTopDocuments())
+SitecoreSearchResult results = search.Execute(query.Build(), 20);	
+foreach (Item item in result.GetPagedItems(0, 10))
 {
-	Console.WriteLine(document.GetValues("field")[0]);
+	Console.WriteLine(item["My Property"]);
 }
 ```
 
 OR
 
 ```C#
-LuceneSearch search = new LuceneSearch(indexPath));
+SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
 
-IQueryBuilder query = new IQueryBuilder();
+ID templateId = new ID("{8A255FA5-4198-4FAA-B56D-3DF6116F9342}");
+
+IQueryBuilder query = new QueryBuilder();
 
 query.Setup(
-	x => x.Term("field", "value"),
-	x => x.Or
-			(
-				y => y.Term("_name", "work"),
-				y => y.Term("_name", "text")
-			)
+	x => x.TemplateId(templateId)
 );
 
-LuceneSearchResult results = search.Execute(query.Build(), 20);	
-foreach (Document document in result.GetTopDocuments())
+SitecoreSearchResult results = search.Execute(query.Build(), 20);	
+foreach (Item item in result.GetPagedItems(0, 10))
 {
-	Console.WriteLine(document.GetValues("field")[0]);
+	Console.WriteLine(item["My Property"]);
 }
 ```
 
