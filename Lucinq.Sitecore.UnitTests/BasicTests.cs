@@ -38,7 +38,7 @@ namespace Sitecinq.IntegrationTests
 		{
 			SitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
 			ID templateId = new ID("{8A255FA5-4198-4FAA-B56D-3DF6116F9342}");
-			queryBuilder.TemplateId(templateId.ToShortID().ToString());
+			queryBuilder.TemplateId(templateId.ToShortID().ToString().ToLower());
 			var luceneResult = search.Execute(queryBuilder, 20);
 			Assert.Greater(luceneResult.TotalHits, 0);
 			SitecoreSearchResult result = new SitecoreSearchResult(luceneResult, new TestDatabaseHelper());
