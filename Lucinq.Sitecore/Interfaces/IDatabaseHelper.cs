@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Sitecore.Data;
+﻿using Sitecore.Data;
 using Sitecore.Data.Items;
 
-namespace Sitecinq.Interfaces
+namespace Lucinq.Sitecore.Interfaces
 {
 	public interface IDatabaseHelper
 	{

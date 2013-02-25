@@ -1,4 +1,4 @@
-﻿namespace Sitecinq.Constants
+﻿namespace Lucinq.Sitecore.Constants
 {
 	public class SitecoreFields
 	{

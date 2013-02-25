@@ -1,4 +1,4 @@
-﻿namespace Sitecinq.IntegrationTests
+﻿namespace Lucinq.Sitecore.UnitTests
 {
 	public class Constants
 	{

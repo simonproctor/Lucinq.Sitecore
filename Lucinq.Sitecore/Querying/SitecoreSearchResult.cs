@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lucene.Net.Documents;
 using Lucinq.Interfaces;
-using Sitecinq.Constants;
-using Sitecinq.Interfaces;
+using Lucinq.Sitecore.Constants;
+using Lucinq.Sitecore.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 
-namespace Sitecinq.Querying
+namespace Lucinq.Sitecore.Querying
 {
-	public class SitecoreSearchResult
+	public class SitecoreSearchResult : ISearchResult
 	{
 		#region [ Fields ]
 
@@ -18,10 +17,10 @@ namespace Sitecinq.Querying
 
 		#region [ Constructors ]
 
-		public SitecoreSearchResult(ISearchResult searchResult, IDatabaseHelper databaseHelper)
+		public SitecoreSearchResult(ILuceneSearchResult searchResult, IDatabaseHelper databaseHelper)
 		{
 			DatabaseHelper = databaseHelper;
-			SearchResult = searchResult;
+			LuceneSearchResult = searchResult;
 		}
 
 		#endregion
@@ -30,7 +29,7 @@ namespace Sitecinq.Querying
 
 		public IDatabaseHelper DatabaseHelper { get; private set; }
 
-		public ISearchResult SearchResult { get; private set; }
+		public ILuceneSearchResult LuceneSearchResult { get; private set; }
 
 		#endregion
 
@@ -39,12 +38,11 @@ namespace Sitecinq.Querying
 		/// <summary>
 		/// Gets a list of items for the documents
 		/// </summary>
-		/// <param name="documents"></param>
 		/// <returns></returns>
-		public List<Item> GetItems(List<Document> documents)
+		public List<Item> GetPagedItems(int start, int end)
 		{
 			List<Item> items = new List<Item>();
-			documents.ForEach(
+			LuceneSearchResult.GetPagedDocuments(start, end).ForEach(
 				document =>
 					{
 						string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
@@ -61,5 +59,7 @@ namespace Sitecinq.Querying
 		}
 
 		#endregion
+
+		public int TotalHits { get { return LuceneSearchResult.TotalHits; } }
 	}
 }
