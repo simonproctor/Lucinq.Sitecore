@@ -66,9 +66,25 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			//queryBuilder.Name("JCB");
 			//
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder, 20);
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
+			foreach (Item item in items)
+			{
+				Console.WriteLine(item.Name);
+			}
+			Assert.Greater(items.Count, 0);
+		}
+
+		[Test]
+		public void GetByNameWildCard()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			queryBuilder.Setup(x => x.NameWildCard("*loader*"));
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 100);
 			foreach (Item item in items)
 			{
 				Console.WriteLine(item.Name);

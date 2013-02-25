@@ -33,13 +33,13 @@ namespace Lucinq.Sitecore.Querying
 
 		#region [ Methods ]
 
-		public SitecoreSearchResult Execute(Query query, int noOfResults, Sort sort = null)
+		public SitecoreSearchResult Execute(Query query, int noOfResults = Int32.MaxValue - 1, Sort sort = null)
 		{
 			var luceneResult = LuceneSearch.Execute(query, noOfResults, sort);
 			return new SitecoreSearchResult(luceneResult, DatabaseHelper);
 		}
 
-		public SitecoreSearchResult Execute(IQueryBuilder queryBuilder, int noOfResults, Sort sort = null)
+		public SitecoreSearchResult Execute(IQueryBuilder queryBuilder, int noOfResults = Int32.MaxValue - 1, Sort sort = null)
 		{
 			return Execute(queryBuilder.Build(), noOfResults, sort);
 		}

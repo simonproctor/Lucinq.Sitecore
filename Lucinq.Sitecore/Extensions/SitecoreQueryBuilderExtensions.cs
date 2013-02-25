@@ -33,6 +33,11 @@ namespace Lucinq.Sitecore.Extensions
 			return inputQueryBuilder.Term(SitecoreFields.Name, value.ToLower(), occur, boost, key);
 		}
 
+		public static WildcardQuery NameWildCard(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			return inputQueryBuilder.WildCard(SitecoreFields.Name, value.ToLower(), occur, boost, key);
+		}
+
 		public static IQueryBuilder Names(this IQueryBuilder inputQueryBuilder, string[] values, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
 			foreach (string templateId in values)
