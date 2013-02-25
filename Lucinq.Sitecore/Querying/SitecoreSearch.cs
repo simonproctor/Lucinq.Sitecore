@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Lucene.Net.Search;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
@@ -36,7 +37,7 @@ namespace Lucinq.Sitecore.Querying
 		public SitecoreSearchResult Execute(Query query, int noOfResults = Int32.MaxValue - 1, Sort sort = null)
 		{
 			var luceneResult = LuceneSearch.Execute(query, noOfResults, sort);
-			return new SitecoreSearchResult(luceneResult, DatabaseHelper);
+			return new SitecoreSearchResult(luceneResult, DatabaseHelper) { ElapsedTimeMs = luceneResult.ElapsedTimeMs };
 		}
 
 		public SitecoreSearchResult Execute(IQueryBuilder queryBuilder, int noOfResults = Int32.MaxValue - 1, Sort sort = null)

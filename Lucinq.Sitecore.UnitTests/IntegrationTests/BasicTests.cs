@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Sitecinq.IntegrationTests;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Globalization;
 
 namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 {
@@ -51,12 +52,43 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			Assert.Greater(sitecoreSearchResult.LuceneSearchResult.TotalHits, 0);
 
 			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
-			foreach (Item item in items)
-			{
-				Console.WriteLine(item.Name);
-			}
+			items.ForEach(
+					item =>
+					{
+						Console.WriteLine(item.Name);
+						Assert.AreEqual("{8A255FA5-4198-4FAA-B56D-3DF6116F9342}", item.TemplateID.ToString());
+					});
 			Assert.Greater(items.Count, 0);
 		}
+
+		#endregion
+
+		#region [ Id Tests ]
+
+		[Test]
+		public void GetById()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			ID itemId = new ID("{14CEA008-749F-46FA-8CA1-C929B92176B7}");
+			queryBuilder.Setup(x => x.Id(itemId));
+			//queryBuilder.Name("JCB");
+			//
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
+			items.ForEach(
+				item =>
+				{
+					Console.WriteLine(item.Name);
+					Assert.IsTrue(item.Name.IndexOf("JCB", StringComparison.InvariantCultureIgnoreCase) >= 0);
+				});
+			Assert.Greater(items.Count, 0);
+		}
+
+		#endregion
+
+		#region [ Name Tests ]
 
 		[Test]
 		public void GetByName()
@@ -69,10 +101,12 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
-			foreach (Item item in items)
-			{
-				Console.WriteLine(item.Name);
-			}
+			items.ForEach(
+				item =>
+				{
+					Console.WriteLine(item.Name);
+					Assert.IsTrue(item.Name.IndexOf("JCB", StringComparison.InvariantCultureIgnoreCase) >= 0);
+				});
 			Assert.Greater(items.Count, 0);
 		}
 
@@ -85,10 +119,31 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 100);
-			foreach (Item item in items)
-			{
-				Console.WriteLine(item.Name);
-			}
+			items.ForEach(
+				item =>
+					{
+						Console.WriteLine(item.Name);
+						Assert.IsTrue(item.Name.IndexOf("loader", StringComparison.InvariantCultureIgnoreCase) > 0);
+					});
+			Assert.Greater(items.Count, 0);
+		}
+
+		[Test]
+		public void GetByLanguage()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			Language language = Language.Parse("en-gb");
+			queryBuilder.Setup(x => x.Language(language));
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 100);
+			items.ForEach(
+				item =>
+				{
+					Console.WriteLine(item.Name);
+					Assert.AreEqual(language, item.Language);
+				});
 			Assert.Greater(items.Count, 0);
 		}
 

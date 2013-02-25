@@ -31,6 +31,10 @@ namespace Lucinq.Sitecore.Querying
 
 		public ILuceneSearchResult LuceneSearchResult { get; private set; }
 
+		public int TotalHits { get { return LuceneSearchResult.TotalHits; } }
+
+		public long ElapsedTimeMs { get; set; }
+
 		#endregion
 
 		#region [ Methods ]
@@ -59,7 +63,5 @@ namespace Lucinq.Sitecore.Querying
 		}
 
 		#endregion
-
-		public int TotalHits { get { return LuceneSearchResult.TotalHits; } }
 	}
 }

@@ -9,5 +9,6 @@
 		public const string Owner = "__owner";
 		public const string Published = "";
 		public const string Database = "_database";
+		public const string Language = "_language";
 	}
 }
