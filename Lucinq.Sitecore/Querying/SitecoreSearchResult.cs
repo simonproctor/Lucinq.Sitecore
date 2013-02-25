@@ -5,6 +5,7 @@ using Lucene.Net.Documents;
 using Lucinq.Interfaces;
 using Sitecinq.Constants;
 using Sitecinq.Interfaces;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 
 namespace Sitecinq.Querying
@@ -46,11 +47,12 @@ namespace Sitecinq.Querying
 			documents.ForEach(
 				document =>
 					{
-						string itemId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
-						if (String.IsNullOrEmpty(itemId))
+						string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
+						if (String.IsNullOrEmpty(itemShortId))
 						{
 							return;
 						}
+						ID itemId = new ID(itemShortId);
 						Item item = DatabaseHelper.GetItem(itemId);
 						items.Add(item);
 					}

@@ -6,3 +6,11 @@ D:\GitHub\Sitecinq\Lucinq.Sitecore\bin\Debug\Lucinq.pdb
 D:\GitHub\Sitecinq\Lucinq.Sitecore\obj\Debug\Lucinq.Sitecore.csprojResolveAssemblyReference.cache
 D:\GitHub\Sitecinq\Lucinq.Sitecore\obj\Debug\Sitecinq.dll
 D:\GitHub\Sitecinq\Lucinq.Sitecore\obj\Debug\Sitecinq.pdb
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\bin\Debug\Sitecinq.dll
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\bin\Debug\Sitecinq.pdb
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\bin\Debug\Lucene.Net.dll
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\bin\Debug\Lucinq.dll
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\bin\Debug\Lucinq.pdb
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\obj\Debug\Lucinq.Sitecore.csprojResolveAssemblyReference.cache
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\obj\Debug\Sitecinq.dll
+D:\GitHub\Lucinq.Sitecore\Lucinq.Sitecore\obj\Debug\Sitecinq.pdb

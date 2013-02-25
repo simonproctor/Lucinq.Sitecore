@@ -2,7 +2,7 @@
 {
 	public class SitecoreFields
 	{
-		public const string Id = "_id";
+		public const string Id = "_group";
 		public const string TemplateId = "_template";
 		public const string Name = "_name";
 		public const string Creator = "_creator";

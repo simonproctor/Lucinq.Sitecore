@@ -25,7 +25,7 @@ namespace Sitecinq.Querying
 
 		public TermQuery Name(string value, float? boost = null, BooleanClause.Occur occur = null, string key = null)
 		{
-			return Term(SitecoreFields.Name, value, occur, boost, key);
+			return Term(SitecoreFields.Name, value.ToLower(), occur, boost, key);
 		}
 
 		public IQueryBuilder Names(string[] values, float? boost = null, BooleanClause.Occur occur = null, string key = null)
