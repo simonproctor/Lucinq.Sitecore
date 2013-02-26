@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sitecore.Data.Items;
 
-namespace Lucinq.Sitecore.Querying
+namespace Lucinq.SitecoreIntegration.Querying
 {
 	public class SitecoreItemResult
 	{

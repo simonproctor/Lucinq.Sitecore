@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Lucinq.Querying;
-using Lucinq.Sitecore.Extensions;
-using Lucinq.Sitecore.Querying;
+using Lucinq.SitecoreIntegration.Extensions;
+using Lucinq.SitecoreIntegration.Querying;
 using NUnit.Framework;
-using Sitecinq.IntegrationTests;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
@@ -172,7 +171,12 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 
 
 		[Test]
-		public void GetByAncestor(bool displayOutput = true)
+		public void GetByAncestor()
+		{
+			Ancestor();
+		}
+
+		private void Ancestor(bool displayOutput = true)
 		{
 			QueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.Ancestor(new ID("{14CEA008-749F-46FA-8CA1-C929B92176B7}")));
@@ -255,15 +259,15 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			Console.WriteLine();
 
 			Console.WriteLine("Pass 1");
-			GetByAncestor(false);
+			Ancestor(false);
 			Console.WriteLine();
 
 			Console.WriteLine("Pass 2");
-			GetByAncestor(false);
+			Ancestor(false);
 			Console.WriteLine();
 
 			Console.WriteLine("Pass 3");
-			GetByAncestor(false);
+			Ancestor(false);
 		}
 		#endregion
 	}

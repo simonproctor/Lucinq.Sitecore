@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using Lucene.Net.Search;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
-using Lucinq.Sitecore.Interfaces;
+using Lucinq.SitecoreIntegration.Interfaces;
 
-namespace Lucinq.Sitecore.Querying
+namespace Lucinq.SitecoreIntegration.Querying
 {
 	public class SitecoreSearch : IDisposable
 	{

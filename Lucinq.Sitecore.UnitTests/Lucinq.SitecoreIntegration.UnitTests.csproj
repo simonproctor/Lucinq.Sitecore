@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="IntegrationTests\BasicTests.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="IntegrationTests\Indexing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDatabaseHelper.cs" />
   </ItemGroup>
@@ -74,13 +75,15 @@
       <Project>{4A37D121-9AC6-489D-B565-C353D85AFB73}</Project>
       <Name>Lucinq</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lucinq.Sitecore\Lucinq.Sitecore.csproj">
+    <ProjectReference Include="..\Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj">
       <Project>{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}</Project>
-      <Name>Sitecinq</Name>
+      <Name>Lucinq.SitecoreIntegration</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Lucinq.Interfaces;
-using Lucinq.Sitecore.Constants;
-using Lucinq.Sitecore.Interfaces;
+using Lucinq.SitecoreIntegration.Constants;
+using Lucinq.SitecoreIntegration.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Globalization;
 
-namespace Lucinq.Sitecore.Querying
+namespace Lucinq.SitecoreIntegration.Querying
 {
 	public class SitecoreSearchResult : ISearchResult
 	{
@@ -58,7 +59,9 @@ namespace Lucinq.Sitecore.Querying
 							return;
 						}
 						ID itemId = new ID(itemShortId);
-						Item item = DatabaseHelper.GetItem(itemId);
+						//Language itemLanguage = Language.Parse(document.GetValues(SitecoreFields.Language).FirstOrDefault());
+
+						Item item = DatabaseHelper.GetItem(itemId/*, itemLanguage*/);
 						items.Add(item);
 					}
 				);

@@ -8,8 +8,8 @@
     <ProjectGuid>{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucinq.Sitecore</RootNamespace>
-    <AssemblyName>Lucinq.Sitecore</AssemblyName>
+    <RootNamespace>Lucinq.SitecoreIntegration</RootNamespace>
+    <AssemblyName>Lucinq.SitecoreIntegration</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,6 +34,9 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\..\Lucinq\Lucinq\bin\Debug\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Client">
+      <HintPath>..\Sitecore\Sitecore.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Sitecore\Sitecore.Kernel.dll</HintPath>
       <Private>False</Private>
@@ -48,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\SitecoreQueryBuilderExtensions.cs" />
+    <Compile Include="Indexing\StandardCrawler.cs" />
     <Compile Include="Interfaces\IDatabaseHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\SitecoreIds.cs" />

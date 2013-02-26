@@ -1,12 +1,12 @@
 ﻿using System;
-using Lucene.Net.QueryParsers;
+using Lucene.Net.Analysis;
 using Lucene.Net.Search;
 using Lucinq.Interfaces;
-using Lucinq.Sitecore.Constants;
+using Lucinq.SitecoreIntegration.Constants;
 using Sitecore.Data;
 using Sitecore.Globalization;
 
-namespace Lucinq.Sitecore.Extensions
+namespace Lucinq.SitecoreIntegration.Extensions
 {
 	public static class SitecoreQueryBuilderExtensions
 	{
@@ -106,10 +106,11 @@ namespace Lucinq.Sitecore.Extensions
 
 		#region [ Regionalisation ]
 
-		public static TermQuery Language(this IQueryBuilder inputQueryBuilder, Language language, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		public static Query Language(this IQueryBuilder inputQueryBuilder, Language language, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
 			string languageString = language.CultureInfo.Name.ToLower();
-			return inputQueryBuilder.Term(SitecoreFields.Language, QueryParser.Escape(languageString), occur, boost, key);
+			KeywordAnalyzer keywordAnalyzer = new KeywordAnalyzer();
+			return inputQueryBuilder.Raw(SitecoreFields.Language, languageString, occur, boost, key, keywordAnalyzer);
 		}
 
 		public static IQueryBuilder Languages(this IQueryBuilder inputQueryBuilder, Language[] languages, BooleanClause.Occur occur = null, float? boost = null, string key = null)
