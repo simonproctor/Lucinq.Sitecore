@@ -1,4 +1,5 @@
-﻿using Lucene.Net.QueryParsers;
+﻿using System;
+using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucinq.Interfaces;
 using Lucinq.Sitecore.Constants;
@@ -30,12 +31,30 @@ namespace Lucinq.Sitecore.Extensions
 
 		#region [ Template Extensions ]
 
+		/// <summary>
+		/// To find items that directly inherit from a particular template
+		/// </summary>
+		/// <param name="inputQueryBuilder"></param>
+		/// <param name="templateId"></param>
+		/// <param name="occur"></param>
+		/// <param name="boost"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
 		public static TermQuery TemplateId(this IQueryBuilder inputQueryBuilder, ID templateId, BooleanClause.Occur occur = null,  float? boost = null, string key = null)
 		{
 			string luceneTemplateId = templateId.ToShortID().ToString().ToLower();
 			return inputQueryBuilder.Term(SitecoreFields.TemplateId, luceneTemplateId, occur, boost, key);
 		}
 
+		/// <summary>
+		/// Helper to add multiple templates
+		/// </summary>
+		/// <param name="inputQueryBuilder"></param>
+		/// <param name="templateIds"></param>
+		/// <param name="boost"></param>
+		/// <param name="occur"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
 		public static IQueryBuilder TemplateIds(this IQueryBuilder inputQueryBuilder, ID[] templateIds, float? boost = null, BooleanClause.Occur occur = null, string key = null)
 		{
 			foreach (ID templateId in templateIds)
@@ -45,6 +64,21 @@ namespace Lucinq.Sitecore.Extensions
 			return inputQueryBuilder;
 		}
 
+		/// <summary>
+		/// Get items derived from the given template at some point in their heirarchy
+		/// </summary>
+		/// <param name="inputQueryBuilder"></param>
+		/// <param name="templateId"></param>
+		/// <param name="occur"></param>
+		/// <param name="boost"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public static TermQuery BaseTemplateId(this IQueryBuilder inputQueryBuilder, ID templateId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			string luceneTemplateId = templateId.ToShortID().ToString().ToLower();
+			return inputQueryBuilder.Term(SitecoreFields.TemplateIds, luceneTemplateId, occur, boost, key);
+		}
+		
 		#endregion
 
 		#region [ Name Extensions ]
@@ -86,6 +120,23 @@ namespace Lucinq.Sitecore.Extensions
 			}
 			return inputQueryBuilder;
 		}
+		#endregion
+
+		#region [ Heirarchy Extensions ]
+
+		public static TermQuery Ancestor(this IQueryBuilder inputQueryBuilder, ID ancestorId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			string ancestorIdString = ancestorId.ToShortID().ToString().ToLower();
+			return inputQueryBuilder.Term(SitecoreFields.Path, ancestorIdString, occur, boost, key);
+		}
+
+		public static WildcardQuery Parent(this IQueryBuilder inputQueryBuilder, ID ancestorId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			throw new NotImplementedException("This needs fixing");
+			string ancestorIdString = ancestorId.ToShortID().ToString().ToLower();
+			return inputQueryBuilder.WildCard(SitecoreFields.Path, String.Format("*" + ancestorIdString), occur, boost, key);
+		}
+
 		#endregion
 	}
 }

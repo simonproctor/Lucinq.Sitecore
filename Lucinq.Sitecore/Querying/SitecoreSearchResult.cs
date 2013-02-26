@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Lucinq.Interfaces;
 using Lucinq.Sitecore.Constants;
@@ -43,9 +44,11 @@ namespace Lucinq.Sitecore.Querying
 		/// Gets a list of items for the documents
 		/// </summary>
 		/// <returns></returns>
-		public List<Item> GetPagedItems(int start, int end)
+		public SitecoreItemResult GetPagedItems(int start, int end)
 		{
 			List<Item> items = new List<Item>();
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
 			LuceneSearchResult.GetPagedDocuments(start, end).ForEach(
 				document =>
 					{
@@ -59,7 +62,8 @@ namespace Lucinq.Sitecore.Querying
 						items.Add(item);
 					}
 				);
-			return items;
+			stopwatch.Stop();
+			return new SitecoreItemResult(items) { ElapsedTimeMs = stopwatch.ElapsedMilliseconds };
 		}
 
 		#endregion

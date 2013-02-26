@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Lucinq.Querying;
 using Lucinq.Sitecore.Extensions;
 using Lucinq.Sitecore.Querying;
@@ -51,39 +52,46 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 
 			Assert.Greater(sitecoreSearchResult.LuceneSearchResult.TotalHits, 0);
 
-			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
-			items.ForEach(
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
 					item =>
 					{
 						Console.WriteLine(item.Name);
 						Assert.AreEqual("{8A255FA5-4198-4FAA-B56D-3DF6116F9342}", item.TemplateID.ToString());
 					});
-			Assert.Greater(items.Count, 0);
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
 		#endregion
 
 		#region [ Id Tests ]
 
+		[Ignore("Needs Finishing")]
 		[Test]
 		public void GetById()
 		{
 			QueryBuilder queryBuilder = new QueryBuilder();
 			ID itemId = new ID("{14CEA008-749F-46FA-8CA1-C929B92176B7}");
 			queryBuilder.Setup(x => x.Id(itemId));
-			//queryBuilder.Name("JCB");
-			//
 
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
-			items.ForEach(
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
 				item =>
 				{
 					Console.WriteLine(item.Name);
-					Assert.IsTrue(item.Name.IndexOf("JCB", StringComparison.InvariantCultureIgnoreCase) >= 0);
+					Assert.AreEqual(itemId, item.ID);
 				});
-			Assert.Greater(items.Count, 0);
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
 		#endregion
@@ -94,20 +102,22 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 		public void GetByName()
 		{
 			QueryBuilder queryBuilder = new QueryBuilder();
-			queryBuilder.Setup(x => x.Name("JCB"));
-			//queryBuilder.Name("JCB");
-			//
+			queryBuilder.Setup(x => x.Name("story"));
 
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 10);
-			items.ForEach(
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
 				item =>
 				{
 					Console.WriteLine(item.Name);
-					Assert.IsTrue(item.Name.IndexOf("JCB", StringComparison.InvariantCultureIgnoreCase) >= 0);
+					Assert.IsTrue(item.Name.IndexOf("story", StringComparison.InvariantCultureIgnoreCase) >= 0);
 				});
-			Assert.Greater(items.Count, 0);
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
 		[Test]
@@ -118,16 +128,21 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 100);
-			items.ForEach(
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
 				item =>
 					{
 						Console.WriteLine(item.Name);
 						Assert.IsTrue(item.Name.IndexOf("loader", StringComparison.InvariantCultureIgnoreCase) > 0);
 					});
-			Assert.Greater(items.Count, 0);
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
+		[Ignore("Needs Finishing")]
 		[Test]
 		public void GetByLanguage()
 		{
@@ -137,16 +152,119 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 
 			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			List<Item> items = sitecoreSearchResult.GetPagedItems(0, 100);
-			items.ForEach(
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
 				item =>
 				{
 					Console.WriteLine(item.Name);
 					Assert.AreEqual(language, item.Language);
 				});
-			Assert.Greater(items.Count, 0);
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
+		#endregion
+
+		#region [ Heirarchy Extensions ]
+
+
+		[Test]
+		public void GetByAncestor(bool displayOutput = true)
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			queryBuilder.Setup(x => x.Ancestor(new ID("{14CEA008-749F-46FA-8CA1-C929B92176B7}")));
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			if (displayOutput)
+			{
+				sitecoreItemResult.Items.ForEach(
+					item =>
+						{
+							Console.WriteLine(item.Name);
+						});
+			}
+
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
+		}
+
+
+		[Ignore("Needs Finishing")]
+		[Test]
+		public void GetByParent()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			ID parentId = new ID("{14CEA008-749F-46FA-8CA1-C929B92176B7}");
+			queryBuilder.Setup(x => x.Parent(parentId));
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
+				item =>
+				{
+					Console.WriteLine(item.Name);
+					Assert.AreEqual(parentId, item.Parent.ID);
+				});
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
+		}
+
+		[Test]
+		public void GetFromDerivedTemplate()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+
+			ID templateId = new ID("{6C167AF3-090C-4E8A-8FC8-3DEC15B9EC19}");
+			queryBuilder.Setup(x => x.BaseTemplateId(templateId));
+
+			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
+
+			sitecoreItemResult.Items.ForEach(
+				item =>
+				{
+					Console.WriteLine(item.Name);
+				});
+			Assert.Greater(sitecoreItemResult.Items.Count, 0);
+		}
+
+		#endregion
+
+		#region [ Performance Tests ]
+
+		[Test]
+		public void RepeatAncestorTests()
+		{
+			Console.WriteLine("The return from sitecore and lucene should get quicker");
+			Console.WriteLine();
+
+			Console.WriteLine("Pass 1");
+			GetByAncestor(false);
+			Console.WriteLine();
+
+			Console.WriteLine("Pass 2");
+			GetByAncestor(false);
+			Console.WriteLine();
+
+			Console.WriteLine("Pass 3");
+			GetByAncestor(false);
+		}
 		#endregion
 	}
 }
