@@ -17,6 +17,7 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 		public void RebuildSearchIndex()
 		{
 			Index searchIndex = SearchManager.GetIndex(IndexName);
+			searchIndex.Rebuild();
 		}
 	}
 }

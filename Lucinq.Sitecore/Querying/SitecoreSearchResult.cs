@@ -50,18 +50,32 @@ namespace Lucinq.SitecoreIntegration.Querying
 			List<Item> items = new List<Item>();
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
-			LuceneSearchResult.GetPagedDocuments(start, end).ForEach(
+			int difference = end - start;
+			int numberAdded = 0;
+			int maxCycle = end + (difference*3);
+			// Sometimes the items aren't published to web, in this case, continue beyond the original number of results.
+			// This currently cycles through 3 times the initial number of rows
+			LuceneSearchResult.GetPagedDocuments(start, maxCycle).ForEach(
 				document =>
 					{
+						if (numberAdded >= end)
+						{
+							return;
+						}
 						string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
 						if (String.IsNullOrEmpty(itemShortId))
 						{
 							return;
 						}
 						ID itemId = new ID(itemShortId);
-						//Language itemLanguage = Language.Parse(document.GetValues(SitecoreFields.Language).FirstOrDefault());
+						Language itemLanguage = Language.Parse(document.GetValues(SitecoreFields.Language).FirstOrDefault());
 
-						Item item = DatabaseHelper.GetItem(itemId/*, itemLanguage*/);
+						Item item = DatabaseHelper.GetItem(itemId, itemLanguage);
+						if (item == null)
+						{
+							return;
+						}
+						numberAdded++;
 						items.Add(item);
 					}
 				);

@@ -213,3 +213,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+[Ss]itecore/*.dll
+[Ss]itecore/*.lic
+[Ss]itecore/*.xml

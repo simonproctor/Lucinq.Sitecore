@@ -14,7 +14,7 @@ namespace Lucinq.SitecoreIntegration.Extensions
 
 		public static TermQuery Id(this IQueryBuilder inputQueryBuilder, ID itemId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			string luceneItemId = itemId.ToShortID().ToString().ToLower();
+			string luceneItemId = itemId.ToLuceneId();
 			return inputQueryBuilder.Term(SitecoreFields.Id, luceneItemId, occur, boost, key);
 		}
 
@@ -42,7 +42,7 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		/// <returns></returns>
 		public static TermQuery TemplateId(this IQueryBuilder inputQueryBuilder, ID templateId, BooleanClause.Occur occur = null,  float? boost = null, string key = null)
 		{
-			string luceneTemplateId = templateId.ToShortID().ToString().ToLower();
+			string luceneTemplateId = templateId.ToLuceneId();
 			return inputQueryBuilder.Term(SitecoreFields.TemplateId, luceneTemplateId, occur, boost, key);
 		}
 
@@ -75,22 +75,17 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		/// <returns></returns>
 		public static TermQuery BaseTemplateId(this IQueryBuilder inputQueryBuilder, ID templateId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			string luceneTemplateId = templateId.ToShortID().ToString().ToLower();
-			return inputQueryBuilder.Term(SitecoreFields.TemplateIds, luceneTemplateId, occur, boost, key);
+			string luceneTemplateId = templateId.ToLuceneId();
+			return inputQueryBuilder.Term(SitecoreFields.TemplatePath, luceneTemplateId, occur, boost, key);
 		}
 		
 		#endregion
 
 		#region [ Name Extensions ]
 
-		public static TermQuery Name(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		public static Query Name(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			return inputQueryBuilder.Term(SitecoreFields.Name, value.ToLower(), occur, boost, key);
-		}
-
-		public static WildcardQuery NameWildCard(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
-		{
-			return inputQueryBuilder.WildCard(SitecoreFields.Name, value.ToLower(), occur, boost, key);
+			return inputQueryBuilder.Field(SitecoreFields.Name, value, occur, boost, key);
 		}
 
 		public static IQueryBuilder Names(this IQueryBuilder inputQueryBuilder, string[] values, BooleanClause.Occur occur = null, float? boost = null, string key = null)
@@ -127,15 +122,36 @@ namespace Lucinq.SitecoreIntegration.Extensions
 
 		public static TermQuery Ancestor(this IQueryBuilder inputQueryBuilder, ID ancestorId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			string ancestorIdString = ancestorId.ToShortID().ToString().ToLower();
+			string ancestorIdString = ancestorId.ToLuceneId();
 			return inputQueryBuilder.Term(SitecoreFields.Path, ancestorIdString, occur, boost, key);
 		}
 
-		public static WildcardQuery Parent(this IQueryBuilder inputQueryBuilder, ID ancestorId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		public static TermQuery Parent(this IQueryBuilder inputQueryBuilder, ID parentId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			throw new NotImplementedException("This needs fixing");
-			string ancestorIdString = ancestorId.ToShortID().ToString().ToLower();
-			return inputQueryBuilder.WildCard(SitecoreFields.Path, String.Format("*" + ancestorIdString), occur, boost, key);
+			string parentIdString = parentId.ToLuceneId();
+			return inputQueryBuilder.Term(SitecoreFields.Parent, parentIdString, occur, boost, key);
+		}
+
+		#endregion
+
+		#region [ Field Extensions ]
+
+		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			if (value.Contains("*"))
+			{
+				return inputQueryBuilder.WildCard(fieldName, value.ToLower(), occur, boost, key);
+			}
+			return inputQueryBuilder.Term(fieldName, value.ToLower(), occur, boost, key);
+		}
+
+		#endregion
+
+		#region [ Id Extensions ]
+
+		public static string ToLuceneId(this ID itemId)
+		{
+			return itemId.ToShortID().ToString().ToLowerInvariant();
 		}
 
 		#endregion

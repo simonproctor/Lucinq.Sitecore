@@ -9,9 +9,24 @@ Features
 ========
 
 - A fluent style api for working with lucene queries for most of the query types and grouping.
-- Paging
+- Lucene based paging
+- Lucene based sorting
+- Query by (including but not limited to) - Name (including wildcards), Direct Template, Base Template, Ancestor, Parent, Language or any combination
 - Query manipulation - remove terms and re-run for example.
 
+Support
+=======
+
+Currently only supports Sitecore 6.6
+
+Getting Started
+===============
+
+- Copy the binaries from sitecore to the /sitecore folder
+- Compile the project
+- Modify the constants in the unit tests to use your own sitecore installation
+- Run the index rebuild unit test to build the index
+- Examine and run the other unit tests at your leisure
 
 Example Syntax
 ==============
@@ -24,14 +39,13 @@ IQueryBuilder query = new QueryBuilder();
 
 query.Name("itemname");
 
-SitecoreSearchResult results = search.Execute(query.Build(), 20);	
-foreach (Item item in result.GetPagedItems(0, 10))
-{
-	Console.WriteLine(item["My Property"]);
-}
+SitecoreSearchResult results = search.Execute(query.Build());	
+
+SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
 ```
 
-OR
+OR - By Template
 
 ```C#
 SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
@@ -44,11 +58,31 @@ query.Setup(
 	x => x.TemplateId(templateId)
 );
 
-SitecoreSearchResult results = search.Execute(query.Build(), 20);	
-foreach (Item item in result.GetPagedItems(0, 10))
-{
-	Console.WriteLine(item["My Property"]);
-}
+SitecoreSearchResult results = search.Execute(query.Build());
+
+SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
+```
+
+OR - By Language
+
+```C#
+SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
+
+Language language = Language.Parse("de-de");
+
+IQueryBuilder query = new QueryBuilder();
+
+query.Setup(
+	x => x.Language(language),
+	x => x.Name("itemname")
+);
+
+SitecoreSearchResult results = search.Execute(query.Build());
+
+SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
+
 ```
 
 License

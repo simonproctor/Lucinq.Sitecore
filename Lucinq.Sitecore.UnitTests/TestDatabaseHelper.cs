@@ -19,6 +19,11 @@ namespace Lucinq.Sitecore.UnitTests
 
 		public Item GetItem(ID itemId, Language language, string databaseName = null)
 		{
+			if (language == null)
+			{
+				Console.WriteLine("Language was not specified for {0}", itemId);
+				language = Language.Parse("en");
+			}
 			return GetDatabase(databaseName).GetItem(itemId, language);
 		}
 
