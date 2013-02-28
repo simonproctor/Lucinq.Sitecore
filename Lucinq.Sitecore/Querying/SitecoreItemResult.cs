@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreItemResult
+	public class SitecoreItemResult : ISitecoreItemResult
 	{
 		#region [ Constructors ]
 

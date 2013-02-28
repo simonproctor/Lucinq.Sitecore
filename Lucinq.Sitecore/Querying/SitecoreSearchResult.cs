@@ -5,13 +5,14 @@ using System.Linq;
 using Lucinq.Interfaces;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.Interfaces;
+using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreSearchResult : ISearchResult
+	public class SitecoreSearchResult : ISearchResult, ISitecoreSearchResult
 	{
 		#region [ Fields ]
 
@@ -45,7 +46,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 		/// Gets a list of items for the documents
 		/// </summary>
 		/// <returns></returns>
-		public SitecoreItemResult GetPagedItems(int start, int end)
+		public ISitecoreItemResult GetPagedItems(int start, int end)
 		{
 			List<Item> items = new List<Item>();
 			Stopwatch stopwatch = new Stopwatch();

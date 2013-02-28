@@ -217,3 +217,7 @@ pip-log.txt
 [Ss]itecore/*.dll
 [Ss]itecore/*.lic
 [Ss]itecore/*.xml
+
+Lucinq.Sitecore/*.nupkg
+Lucinq.Sitecore/*.nuspec
+Lucinq.Sitecore/*.bat

@@ -2,6 +2,7 @@
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.Extensions;
 using Lucinq.SitecoreIntegration.Querying;
+using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using NUnit.Framework;
 using Sitecore.Data;
 using Sitecore.Globalization;
@@ -44,11 +45,11 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			queryBuilder.Setup(x => x.TemplateId(templateId));
 			// queryBuilder.TemplateId(templateId);
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder, 20);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder, 20);
 
 			Assert.Greater(sitecoreSearchResult.LuceneSearchResult.TotalHits, 0);
 
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -75,11 +76,11 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			queryBuilder.Setup(x => x.TemplateId(templateId));
 			// queryBuilder.TemplateId(templateId);
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder, 20);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder, 20);
 
 			Assert.Greater(sitecoreSearchResult.LuceneSearchResult.TotalHits, 0);
 
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 20);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 20);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -105,9 +106,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			ID itemId = new ID(Constants.HomeItemId);
 			queryBuilder.Setup(x => x.Id(itemId));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -131,9 +132,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			QueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.Name("bird"));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -153,9 +154,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			QueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.Name("*a*"));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -176,9 +177,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			Language language = Language.Parse("de-de");
 			queryBuilder.Setup(x => x.Language(language));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -202,9 +203,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			QueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.Field("Display Name", "banking"));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -234,9 +235,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			QueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.Ancestor(new ID(Constants.HomeItemId)));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
 
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 
@@ -263,9 +264,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			ID parentId = new ID(Constants.HomeItemId);
 			queryBuilder.Setup(x => x.Parent(parentId));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -287,9 +288,9 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			ID templateId = new ID(Constants.DerivedTemplateId);
 			queryBuilder.Setup(x => x.BaseTemplateId(templateId));
 
-			SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);

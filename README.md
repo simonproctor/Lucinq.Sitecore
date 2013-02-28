@@ -19,6 +19,13 @@ Support
 
 Currently only supports Sitecore 6.6
 
+NuGet
+=====
+
+Get it now from Nuget https://nuget.org/packages/Lucinq.SitecoreIntegration/
+
+PM> Install-Package Lucinq.SitecoreIntegration
+
 Getting Started
 ===============
 
