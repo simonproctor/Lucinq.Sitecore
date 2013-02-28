@@ -13,5 +13,8 @@
     <releaseNotes>Initial Release built on Lucene.Net 2.9 for Sitecore 6.6</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>lucene.net lucene sitecore lucinq text search information retrieval query</tags>
+    <dependencies> 
+        <dependency id="Lucinq" version="1.0.0"/>
+    </dependencies>
   </metadata>
 </package>
