@@ -35,6 +35,29 @@ Getting Started
 - Run the index rebuild unit test to build the index
 - Examine and run the other unit tests at your leisure
 
+Sitecore Configuration
+======================
+
+```
+<index id="TestSearchIndex" type="Sitecore.Search.Index, Sitecore.Kernel">
+	<param desc="name">$(id)</param>
+	<param desc="folder">$(id)</param>
+	<Analyzer ref="search/analyzer"/>
+	<locations hint="list:AddCrawler">
+		<master type="Lucinq.SitecoreIntegration.Indexing.StandardCrawler, Lucinq.SitecoreIntegration">
+			<Database>master</Database>
+			<Root>/sitecore/content/Sites/</Root>
+			<IndexAllFields>true</IndexAllFields>
+		</master>
+		<web type="Lucinq.SitecoreIntegration.Indexing.StandardCrawler, Lucinq.SitecoreIntegration">
+			<Database>web</Database>
+			<Root>/sitecore/content/Sites/</Root>
+			<IndexAllFields>true</IndexAllFields>
+		</web>
+	</locations>
+</index>
+```
+
 Example Syntax
 ==============
 
