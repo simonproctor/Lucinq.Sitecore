@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Sitecore extensions for Lucinq For Lucene.Net</title>
+    <authors>Nathanael Mann, Simon Proctor</authors>
+    <owners>cardinal252</owners>
+    <licenseUrl>http://www.gnu.org/licenses/</licenseUrl>
+    <projectUrl>https://github.com/cardinal252/Lucinq.Sitecore</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sitecore extensions for the Lucinq for Lucene.Net API</description>
+    <releaseNotes>Initial Release built on Lucene.Net 2.9 for Sitecore 6.6</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>lucene.net lucene sitecore lucinq text search information retrieval query</tags>
+  </metadata>
+</package>

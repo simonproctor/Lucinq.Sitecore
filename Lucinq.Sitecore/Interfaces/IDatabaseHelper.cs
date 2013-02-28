@@ -6,6 +6,8 @@ namespace Lucinq.SitecoreIntegration.Interfaces
 {
 	public interface IDatabaseHelper
 	{
+		Language DefaultLanguage { get; }
+
 		Database GetDatabase(string name = null);
 
 		Item GetItem(ID itemId, Language language, string databaseName = null);

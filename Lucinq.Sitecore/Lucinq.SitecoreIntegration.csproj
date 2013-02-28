@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseManagement\ContextDatabaseHelper.cs" />
+    <Compile Include="DatabaseManagement\TestDatabaseHelper.cs" />
     <Compile Include="Extensions\SitecoreQueryBuilderExtensions.cs" />
     <Compile Include="Indexing\StandardCrawler.cs" />
     <Compile Include="Interfaces\IDatabaseHelper.cs" />

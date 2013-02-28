@@ -1,5 +1,6 @@
 ﻿using System;
 using Lucinq.Querying;
+using Lucinq.SitecoreIntegration.DatabaseManagement;
 using Lucinq.SitecoreIntegration.Extensions;
 using Lucinq.SitecoreIntegration.Querying;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
