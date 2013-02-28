@@ -14,7 +14,7 @@
     <copyright>Copyright 2013</copyright>
     <tags>lucene.net lucene sitecore lucinq text search information retrieval query</tags>
     <dependencies> 
-        <dependency id="Lucinq" version="1.0.0"/>
+        <dependency id="Lucinq" version="1.0.4807"/>
     </dependencies>
   </metadata>
 </package>

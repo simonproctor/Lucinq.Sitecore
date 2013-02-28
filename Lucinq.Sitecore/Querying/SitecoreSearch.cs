@@ -8,7 +8,7 @@ using Lucinq.SitecoreIntegration.Querying.Interfaces;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreSearch : IDisposable, ISitecoreSearch
+	public class SitecoreSearch : ISitecoreSearch
 	{
 		#region [ Constructors ]
 
