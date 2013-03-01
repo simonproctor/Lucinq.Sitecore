@@ -2,11 +2,9 @@
 
 namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 {
-	public interface ISitecoreSearchResult
+	public interface ISitecoreSearchResult : ISearchResult
 	{
 		ILuceneSearchResult LuceneSearchResult { get; }
-		int TotalHits { get; }
-		long ElapsedTimeMs { get; set; }
 
 		/// <summary>
 		/// Gets a list of items for the documents

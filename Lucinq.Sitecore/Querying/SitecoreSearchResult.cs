@@ -12,12 +12,8 @@ using Sitecore.Globalization;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreSearchResult : ISearchResult, ISitecoreSearchResult
+	public class SitecoreSearchResult : ISitecoreSearchResult
 	{
-		#region [ Fields ]
-
-		#endregion
-
 		#region [ Constructors ]
 
 		public SitecoreSearchResult(ILuceneSearchResult searchResult, IDatabaseHelper databaseHelper)
