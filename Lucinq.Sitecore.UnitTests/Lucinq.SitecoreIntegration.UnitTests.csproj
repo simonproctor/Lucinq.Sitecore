@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\..\Lucinq\Lucinq\bin\Debug\Lucene.Net.dll</HintPath>
+    <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucinq, Version=1.0.4807.33821, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucinq.1.0.4808.16152\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -70,20 +75,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lucinq\Lucinq\Lucinq.csproj">
-      <Project>{4A37D121-9AC6-489D-B565-C353D85AFB73}</Project>
-      <Name>Lucinq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj">
-      <Project>{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}</Project>
-      <Name>Lucinq.SitecoreIntegration</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj">
+      <Project>{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}</Project>
+      <Name>Lucinq.SitecoreIntegration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

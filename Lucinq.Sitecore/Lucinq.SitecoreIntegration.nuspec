@@ -10,11 +10,11 @@
     <projectUrl>https://github.com/cardinal252/Lucinq.Sitecore</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Sitecore extensions for the Lucinq for Lucene.Net API</description>
-    <releaseNotes>Initial Release built on Lucene.Net 2.9 for Sitecore 6.6</releaseNotes>
-    <copyright>Copyright 2013</copyright>
+    <copyright>Copyright 2013 Cardinal IT Solutions Ltd</copyright>
     <tags>lucene.net lucene sitecore lucinq text search information retrieval query</tags>
-    <dependencies> 
-        <dependency id="Lucinq" version="1.0.4807"/>
+    <dependencies>
+        <dependency id="Lucene.Net" version="[2.9.4.1]"/>
+        <dependency id="Lucinq" version="1.0.4808"/>
     </dependencies>
   </metadata>
 </package>

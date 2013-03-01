@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\..\Lucinq\Lucinq\bin\Debug\Lucene.Net.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucinq, Version=1.0.4808.16152, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucinq.1.0.4808.16152\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Client">
       <HintPath>..\Sitecore\Sitecore.Client.dll</HintPath>
@@ -65,10 +72,7 @@
     <Compile Include="Querying\SitecoreSearchResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lucinq\Lucinq\Lucinq.csproj">
-      <Project>{4A37D121-9AC6-489D-B565-C353D85AFB73}</Project>
-      <Name>Lucinq</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
