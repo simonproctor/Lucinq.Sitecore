@@ -5,7 +5,6 @@ using Lucene.Net.Documents;
 using Lucinq.Building;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.Extensions;
-using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Search;
@@ -45,23 +44,19 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			// base.AddAllFields(document, item, versionSpecific);
 		}
 
-		protected override void AddSpecialFields(Document document, Item item)
-		{
-			// base.AddSpecialFields(document, item);
-
-		}
-
 
 		protected List<Field> GetFields(Item item)
 		{
-			return item.Fields.ToList();
+			return item.Fields.Where(IncludeField).ToList();
 		}
 
 		protected virtual void ProcessFields(Document document, Item item)
 		{
 			item.Fields.ReadAll();
 			AddLucinqFields(document, item);
-			var fields = GetFields(item);
+			AddCustomFields(document, item);
+
+			List<Field> fields = GetFields(item);
 			fields.ForEach(field =>
 				{
 					LuceneField luceneField = ProcessField(field);
@@ -69,11 +64,27 @@ namespace Lucinq.SitecoreIntegration.Indexing
 					{
 						return;
 					}
+					// todo: Allow specification of stored fields
 					document.AddAnalysedField(field.Name, field.Value);
 				});
 		}
 
-		protected virtual void AddLucinqFields(Document document, Item item)
+		/// <summary>
+		/// Override this method to add your additional fields
+		/// </summary>
+		/// <param name="document"></param>
+		/// <param name="item"></param>
+		protected virtual void AddCustomFields(Document document, Item item)
+		{
+			// Placeholder method to add additional fields specific to the implementation
+		}
+
+		/// <summary>
+		/// Adds the lucinq specific fields
+		/// </summary>
+		/// <param name="document"></param>
+		/// <param name="item"></param>
+		protected void AddLucinqFields(Document document, Item item)
 		{
 			StringBuilder templatePathBuilder = new StringBuilder();
 			AddTemplatePath(item.Template, templatePathBuilder);
@@ -125,10 +136,6 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 		protected virtual LuceneField ProcessField(Field field)
 		{
-			if (!IncludeField(field))
-			{
-				return null;
-			}
 			LuceneField luceneField = new LuceneField(field.Name.ToLower(), field.Value.ToLower(), LuceneField.Store.YES,
 			                                          LuceneField.Index.ANALYZED);
 			return luceneField;
@@ -136,6 +143,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 		protected virtual bool IncludeField(Field field)
 		{
+			// todo: Allow Ommision of Fields
 			return true;
 		}
 
