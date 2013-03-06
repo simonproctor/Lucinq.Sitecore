@@ -2,7 +2,7 @@
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 
-namespace Lucinq.SitecoreIntegration.Interfaces
+namespace Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces
 {
 	public interface IDatabaseHelper
 	{

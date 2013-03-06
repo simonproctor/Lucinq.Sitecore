@@ -145,6 +145,11 @@ namespace Lucinq.SitecoreIntegration.Extensions
 			return inputQueryBuilder.Term(fieldName, value.ToLower(), occur, boost, key);
 		}
 
+		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, ID value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			return inputQueryBuilder.Term(fieldName, value.ToLuceneId(), occur, boost, key);
+		}
+
 		#endregion
 
 		#region [ Id Extensions ]

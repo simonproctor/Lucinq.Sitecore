@@ -1,14 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using Lucene.Net.Documents;
 using Lucinq.Building;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.Extensions;
+using Sitecore.Collections;
+using Sitecore.Data;
+using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Search;
 using Sitecore.Search.Crawlers;
+using Sitecore.Xml;
+using DateField = Sitecore.Data.Fields.DateField;
 using Field = Sitecore.Data.Fields.Field;
 using LuceneField = Lucene.Net.Documents.Field;
 
@@ -16,7 +23,51 @@ namespace Lucinq.SitecoreIntegration.Indexing
 {
 	public class StandardCrawler : DatabaseCrawler
 	{
+
+		#region [ Fields ]
+
+		private static readonly Dictionary<string, string> fieldTypes = new Dictionary<string, string>();
+
+		private static readonly Dictionary<ID, FieldConfiguration> fieldConfigurations = new Dictionary<ID, FieldConfiguration>();
+
+		#endregion
+
+		#region [ Properties ]
+
+		public static Dictionary<string, string> FieldTypes { get { return fieldTypes; } }
+
+		public static Dictionary<ID, FieldConfiguration> FieldConfigurations { get { return fieldConfigurations; } }
+
+		#endregion
+
 		#region [ Methods ]
+
+		public virtual void AddFieldTypes(XmlNode configNode)
+		{
+			Assert.ArgumentNotNull(configNode, "configNode");
+			var fieldName = XmlUtil.GetAttribute("name", configNode);
+			var fieldType = XmlUtil.GetAttribute("type", configNode);
+			FieldTypes.Add(fieldName.ToLowerInvariant(), fieldType.ToLower());
+		}
+
+		public virtual void AddFieldConfigurations(XmlNode configNode)
+		{
+			Assert.ArgumentNotNull(configNode, "configNode");
+			var fieldName = XmlUtil.GetAttribute("name", configNode);
+			var idString = XmlUtil.GetAttribute("id", configNode);
+			ID fieldId;
+			if (!ID.TryParse(idString, out fieldId))
+			{
+				return;
+			}
+			FieldConfiguration fieldConfiguration = new FieldConfiguration();
+			bool store;
+			fieldConfiguration.Store = bool.TryParse(XmlUtil.GetAttribute("store", configNode), out store) && store;
+			bool analyze;
+			fieldConfiguration.Analyze = bool.TryParse(XmlUtil.GetAttribute("analyze", configNode), out analyze) && analyze;
+
+			FieldConfigurations.Add(fieldId, fieldConfiguration);
+		}
 
 		protected override void IndexVersion(Item item, Item latestVersion, IndexUpdateContext context)
 		{
@@ -64,9 +115,114 @@ namespace Lucinq.SitecoreIntegration.Indexing
 					{
 						return;
 					}
-					// todo: Allow specification of stored fields
-					document.AddAnalysedField(field.Name, field.Value);
+					AddField(document, field);
 				});
+		}
+
+		protected virtual void AddField(Document document, Field field)
+		{
+			string fieldType = "value";
+			string fieldTypeKey = field.TypeKey.ToLower();
+			if (FieldTypes.ContainsKey(fieldTypeKey))
+			{
+				fieldType = FieldTypes[fieldTypeKey].ToLower();
+			}
+
+			FieldConfiguration fieldConfiguration = new FieldConfiguration{FieldId = field.ID, Analyze = true, Store = false};
+			if (FieldConfigurations.ContainsKey(field.ID))
+			{
+				fieldConfiguration = FieldConfigurations[field.ID];
+			}
+			switch (fieldType)
+			{
+				case "multilist":
+					AddMultilistField(document, field, fieldConfiguration);
+					break;
+				case "link":
+					AddLinkField(document, field, fieldConfiguration);
+					break;
+				case "datetime":
+					AddDateTimeField(document, field, fieldConfiguration);
+					break;
+				default:
+					AddValueField(document, field, fieldConfiguration);
+					break;
+			}
+		
+		}
+
+		protected virtual void AddMultilistField(Document document, MultilistField field, FieldConfiguration fieldConfiguration)
+		{
+			if (field == null || fieldConfiguration == null)
+			{
+				return;
+			}
+
+			StringBuilder fieldBuilder = new StringBuilder();
+			bool first = true;
+			foreach (ID targetId in field.TargetIDs)
+			{
+				if (!first)
+				{
+					fieldBuilder.Append(" ");
+				}
+				first = false;
+				fieldBuilder.Append(targetId.ToLuceneId());
+			}
+
+			if (fieldConfiguration.Analyze)
+			{
+				document.AddAnalysedField(field.InnerField.Name, fieldBuilder.ToString(), fieldConfiguration.Store);
+				return;
+			}
+
+			document.AddNonAnalysedField(field.InnerField.Name, fieldBuilder.ToString(), fieldConfiguration.Store);
+		}
+
+		protected void AddDateTimeField(Document document, DateField field, FieldConfiguration fieldConfiguration)
+		{
+			if (field == null || fieldConfiguration == null)
+			{
+				return;
+			}
+
+			if (fieldConfiguration.Analyze)
+			{
+				document.AddAnalysedField(field.InnerField.Name, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+				return;
+			}
+
+			document.AddNonAnalysedField(field.InnerField.Name, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+		}
+
+		protected virtual void AddLinkField(Document document, LinkField field, FieldConfiguration fieldConfiguration)
+		{
+			if (field == null || fieldConfiguration == null)
+			{
+				return;
+			}
+
+			if (fieldConfiguration.Analyze)
+			{
+				document.AddAnalysedField(field.InnerField.Name, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+				return;
+			}
+			document.AddNonAnalysedField(field.InnerField.Name, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+		}
+
+		protected virtual void AddValueField(Document document, Field field, FieldConfiguration fieldConfiguration)
+		{
+			if (field == null || fieldConfiguration == null)
+			{
+				return;
+			}
+
+			if (fieldConfiguration.Analyze)
+			{
+				document.AddAnalysedField(field.Name, field.Value, fieldConfiguration.Store);
+				return;
+			}
+			document.AddNonAnalysedField(field.Name, field.Value, fieldConfiguration.Store);
 		}
 
 		/// <summary>

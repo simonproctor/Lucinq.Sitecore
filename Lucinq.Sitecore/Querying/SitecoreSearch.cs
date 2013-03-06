@@ -3,7 +3,7 @@ using Lucene.Net.Search;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
-using Lucinq.SitecoreIntegration.Interfaces;
+using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 
 namespace Lucinq.SitecoreIntegration.Querying

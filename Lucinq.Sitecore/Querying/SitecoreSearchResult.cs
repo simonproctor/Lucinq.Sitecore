@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Lucinq.Interfaces;
 using Lucinq.SitecoreIntegration.Constants;
-using Lucinq.SitecoreIntegration.Interfaces;
+using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;

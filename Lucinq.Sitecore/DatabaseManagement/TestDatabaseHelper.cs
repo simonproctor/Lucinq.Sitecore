@@ -1,5 +1,5 @@
 ﻿using System;
-using Lucinq.SitecoreIntegration.Interfaces;
+using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
