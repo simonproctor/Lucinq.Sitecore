@@ -42,14 +42,14 @@ namespace Lucinq.SitecoreIntegration.Querying
 		/// Gets a list of items for the documents
 		/// </summary>
 		/// <returns></returns>
-		public ISitecoreItemResult GetPagedItems(int start, int end)
+		public ISitecoreItemResult GetPagedItems(int start, int end, int multiplier = 3)
 		{
 			List<Item> items = new List<Item>();
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 			int difference = (end + 1) - start;
 			int numberAdded = 0;
-			int maxCycle = end + (difference*3);
+			int maxCycle = end + (difference*multiplier);
 			// Sometimes the items aren't published to web, in this case, continue beyond the original number of results.
 			// This currently cycles through 3 times the initial number of rows
 			LuceneSearchResult.GetPagedDocuments(start, maxCycle).ForEach(

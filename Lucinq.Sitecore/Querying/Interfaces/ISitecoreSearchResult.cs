@@ -10,6 +10,6 @@ namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 		/// Gets a list of items for the documents
 		/// </summary>
 		/// <returns></returns>
-		ISitecoreItemResult GetPagedItems(int start, int end);
+		ISitecoreItemResult GetPagedItems(int start, int end, int multiplier = 3);
 	}
 }
