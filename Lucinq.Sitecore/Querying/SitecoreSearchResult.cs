@@ -47,7 +47,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 			List<Item> items = new List<Item>();
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
-			int difference = end - start;
+			int difference = (end + 1) - start;
 			int numberAdded = 0;
 			int maxCycle = end + (difference*3);
 			// Sometimes the items aren't published to web, in this case, continue beyond the original number of results.
@@ -55,7 +55,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 			LuceneSearchResult.GetPagedDocuments(start, maxCycle).ForEach(
 				document =>
 					{
-						if (numberAdded >= end)
+						if (numberAdded >= difference)
 						{
 							return;
 						}

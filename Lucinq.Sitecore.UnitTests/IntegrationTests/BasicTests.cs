@@ -326,5 +326,29 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			Ancestor(false);
 		}
 		#endregion
+
+		#region [ Paging Tests ]
+		
+		[Test]
+		public  void Paging()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			queryBuilder.Setup(x => x.Ancestor(new ID(Constants.HomeItemId)));
+
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+
+			ISitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+
+			Assert.AreEqual(10, sitecoreItemResult.Items.Count);
+
+			ISitecoreItemResult sitecoreItemResult2 = sitecoreSearchResult.GetPagedItems(0, 19);
+
+			Assert.AreEqual(20, sitecoreItemResult2.Items.Count);
+
+			ISitecoreItemResult sitecoreItemResult3 = sitecoreSearchResult.GetPagedItems(10, 29);
+
+			Assert.AreEqual(20, sitecoreItemResult3.Items.Count);
+		}
+		#endregion
 	}
 }
