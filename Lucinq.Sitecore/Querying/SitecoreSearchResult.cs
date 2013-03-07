@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Lucene.Net.Documents;
 using Lucinq.Interfaces;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
@@ -51,7 +52,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 			int numberAdded = 0;
 			int maxCycle = end + (difference*multiplier);
 			// Sometimes the items aren't published to web, in this case, continue beyond the original number of results.
-			// This currently cycles through 3 times the initial number of rows
+			// This currently cycles through x times the initial number of rows
 			LuceneSearchResult.GetPagedDocuments(start, maxCycle).ForEach(
 				document =>
 					{
@@ -59,25 +60,40 @@ namespace Lucinq.SitecoreIntegration.Querying
 						{
 							return;
 						}
-						string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
-						if (String.IsNullOrEmpty(itemShortId))
-						{
-							return;
-						}
-						ID itemId = new ID(itemShortId);
-						Language itemLanguage = Language.Parse(document.GetValues(SitecoreFields.Language).FirstOrDefault());
-
-						Item item = DatabaseHelper.GetItem(itemId, itemLanguage);
-						if (item == null)
+						if (!AddItem(document, items))
 						{
 							return;
 						}
 						numberAdded++;
-						items.Add(item);
 					}
 				);
 			stopwatch.Stop();
 			return new SitecoreItemResult(items) { ElapsedTimeMs = stopwatch.ElapsedMilliseconds };
+		}
+
+		private bool AddItem(Document document, List<Item> items)
+		{
+			string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
+			if (String.IsNullOrEmpty(itemShortId))
+			{
+				return false;
+			}
+			ID itemId = new ID(itemShortId);
+			string language = document.GetValues(SitecoreFields.Language).FirstOrDefault();
+			if (String.IsNullOrEmpty(language))
+			{
+				throw new Exception("The language could not be retrieved from the lucene return");
+			}
+			Language itemLanguage = Language.Parse(language);
+
+			Item item = DatabaseHelper.GetItem(itemId, itemLanguage);
+			if (item == null)
+			{
+				return false;
+			}
+
+			items.Add(item);
+			return true;
 		}
 
 		#endregion

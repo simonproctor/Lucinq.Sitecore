@@ -108,15 +108,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			AddCustomFields(document, item);
 
 			List<Field> fields = GetFields(item);
-			fields.ForEach(field =>
-				{
-					LuceneField luceneField = ProcessField(field);
-					if (luceneField == null)
-					{
-						return;
-					}
-					AddField(document, field);
-				});
+			fields.ForEach(field => AddField(document, field));
 		}
 
 		protected virtual void AddField(Document document, Field field)
@@ -172,11 +164,11 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name, fieldBuilder.ToString(), fieldConfiguration.Store);
+				document.AddAnalysedField(field.InnerField.Name.ToLower(), fieldBuilder.ToString(), fieldConfiguration.Store);
 				return;
 			}
 
-			document.AddNonAnalysedField(field.InnerField.Name, fieldBuilder.ToString(), fieldConfiguration.Store);
+			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), fieldBuilder.ToString(), fieldConfiguration.Store);
 		}
 
 		protected void AddDateTimeField(Document document, DateField field, FieldConfiguration fieldConfiguration)
@@ -188,11 +180,11 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+				document.AddAnalysedField(field.InnerField.Name.ToLower(), DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
 				return;
 			}
 
-			document.AddNonAnalysedField(field.InnerField.Name, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
 		}
 
 		protected virtual void AddLinkField(Document document, LinkField field, FieldConfiguration fieldConfiguration)
@@ -204,10 +196,10 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+				document.AddAnalysedField(field.InnerField.Name.ToLower(), field.TargetID.ToLuceneId(), fieldConfiguration.Store);
 				return;
 			}
-			document.AddNonAnalysedField(field.InnerField.Name, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), field.TargetID.ToLuceneId(), fieldConfiguration.Store);
 		}
 
 		protected virtual void AddValueField(Document document, Field field, FieldConfiguration fieldConfiguration)
@@ -219,10 +211,10 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.Name, field.Value, fieldConfiguration.Store);
+				document.AddAnalysedField(field.Name.ToLower(), field.Value, fieldConfiguration.Store);
 				return;
 			}
-			document.AddNonAnalysedField(field.Name, field.Value, fieldConfiguration.Store);
+			document.AddNonAnalysedField(field.Name.ToLower(), field.Value, fieldConfiguration.Store);
 		}
 
 		/// <summary>
@@ -251,6 +243,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			document.Setup(
 					x => x.AddAnalysedField(SitecoreFields.Id, item.ID.ToLuceneId(), true),
 					x => x.AddNonAnalysedField(SitecoreFields.Language, item.Language.Name, true),
+					x => x.AddNonAnalysedField(SitecoreFields.TemplateId, item.TemplateID.ToLuceneId(), true),
 					x => x.AddAnalysedField(SitecoreFields.Name, item.Name, true),
 					x => x.AddAnalysedField(SitecoreFields.TemplatePath, templatePathBuilder.ToString()),
 					x => x.AddAnalysedField(SitecoreFields.Path, pathBuilder.ToString()),

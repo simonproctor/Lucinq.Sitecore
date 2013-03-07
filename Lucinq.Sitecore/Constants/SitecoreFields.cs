@@ -2,14 +2,15 @@
 {
 	public class SitecoreFields
 	{
-		public const string Id = "sitecore_id";
-		public const string TemplateId = "template";
-		public const string Name = "item_name";
+		public const string Id = "lc_id";
+		public const string TemplateId = "lc_template";
+		public const string Name = "lc_name";
 		public const string Published = "";
-		public const string Language = "language";
-		public const string Path = "path";
-		public const string Parent = "parent";
-		public const string TemplatePath = "templatepath";
-		public const string TemplateIds = "templates";
+		public const string Language = "lc_language";
+		public const string Path = "lc_path";
+		public const string Parent = "lc_parent";
+		public const string TemplatePath = "lc_templatepath";
+		public const string TemplateIds = "lc_templates";
+		public const string Database = "_database";
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Lucinq.Interfaces;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
 using Lucinq.SitecoreIntegration.Extensions;
@@ -42,7 +43,7 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 		{
 			ID templateId = new ID(Constants.TestTemplateId);
 
-			QueryBuilder queryBuilder = new QueryBuilder();
+			IQueryBuilder queryBuilder = new QueryBuilder();
 			queryBuilder.Setup(x => x.TemplateId(templateId));
 			// queryBuilder.TemplateId(templateId);
 
@@ -175,7 +176,7 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 		public void GetByLanguage()
 		{
 			QueryBuilder queryBuilder = new QueryBuilder();
-			Language language = Language.Parse("de-de");
+			Language language = Language.Parse("de");
 			queryBuilder.Setup(x => x.Language(language));
 
 			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
@@ -202,7 +203,7 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 		public void GetByFieldValue()
 		{
 			QueryBuilder queryBuilder = new QueryBuilder();
-			queryBuilder.Setup(x => x.Field("Display Name", "banking"));
+			queryBuilder.Setup(x => x.Field("Display Name", "news"));
 
 			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
@@ -215,7 +216,7 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 				item =>
 				{
 					Console.WriteLine(item.Name);
-					Assert.IsTrue(item["Display Name"].IndexOf("banking", StringComparison.InvariantCultureIgnoreCase) >= 0);
+					Assert.IsTrue(item["Display Name"].IndexOf("news", StringComparison.InvariantCultureIgnoreCase) >= 0);
 				});
 			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}

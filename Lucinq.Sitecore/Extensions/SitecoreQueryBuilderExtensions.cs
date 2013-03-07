@@ -140,14 +140,23 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		{
 			if (value.Contains("*"))
 			{
-				return inputQueryBuilder.WildCard(fieldName, value.ToLower(), occur, boost, key);
+				return inputQueryBuilder.WildCard(fieldName.ToLower(), value.ToLower(), occur, boost, key);
 			}
-			return inputQueryBuilder.Term(fieldName, value.ToLower(), occur, boost, key);
+			return inputQueryBuilder.Term(fieldName.ToLower(), value.ToLower(), occur, boost, key);
 		}
 
 		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, ID value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			return inputQueryBuilder.Term(fieldName, value.ToLuceneId(), occur, boost, key);
+			return inputQueryBuilder.Term(fieldName.ToLower(), value.ToLuceneId(), occur, boost, key);
+		}
+
+		#endregion
+
+		#region [ Database ]
+
+		public static Query Database(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		{
+			return inputQueryBuilder.Term(SitecoreFields.Database, value.ToLower(), occur, boost, key);
 		}
 
 		#endregion
