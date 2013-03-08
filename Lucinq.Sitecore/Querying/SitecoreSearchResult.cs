@@ -43,7 +43,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 		/// Gets a list of items for the documents
 		/// </summary>
 		/// <returns></returns>
-		public ISitecoreItemResult GetPagedItems(int start, int end, int multiplier = 3)
+		public virtual ISitecoreItemResult GetPagedItems(int start, int end, int multiplier = 3)
 		{
 			List<Item> items = new List<Item>();
 			Stopwatch stopwatch = new Stopwatch();
@@ -71,12 +71,32 @@ namespace Lucinq.SitecoreIntegration.Querying
 			return new SitecoreItemResult(items) { ElapsedTimeMs = stopwatch.ElapsedMilliseconds };
 		}
 
-		private bool AddItem(Document document, List<Item> items)
+		/// <summary>
+		/// Gets an item by its index
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		public virtual Item GetItem(int index = 0)
+		{
+			var topDocs = LuceneSearchResult.GetTopDocuments();
+			if (index < 0 || index > topDocs.Count - 1)
+			{
+				return null;
+			}
+			return GetItem(topDocs[index]);
+		}
+
+		/// <summary>
+		/// Gets an item from mthe document
+		/// </summary>
+		/// <param name="document">The lucene document to use</param>
+		/// <returns></returns>
+		protected virtual Item GetItem(Document document)
 		{
 			string itemShortId = document.GetValues(SitecoreFields.Id).FirstOrDefault();
 			if (String.IsNullOrEmpty(itemShortId))
 			{
-				return false;
+				return null;
 			}
 			ID itemId = new ID(itemShortId);
 			string language = document.GetValues(SitecoreFields.Language).FirstOrDefault();
@@ -86,7 +106,12 @@ namespace Lucinq.SitecoreIntegration.Querying
 			}
 			Language itemLanguage = Language.Parse(language);
 
-			Item item = DatabaseHelper.GetItem(itemId, itemLanguage);
+			return DatabaseHelper.GetItem(itemId, itemLanguage);
+		}
+
+		private bool AddItem(Document document, List<Item> items)
+		{
+			Item item = GetItem(document);
 			if (item == null)
 			{
 				return false;

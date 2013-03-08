@@ -1,4 +1,5 @@
 ﻿using Lucinq.Interfaces;
+using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 {
@@ -11,5 +12,11 @@ namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		ISitecoreItemResult GetPagedItems(int start, int end, int multiplier = 3);
+
+		/// <summary>
+		/// Gets the item by index
+		/// </summary>
+		/// <returns></returns>
+		Item GetItem(int index = 0);
 	}
 }

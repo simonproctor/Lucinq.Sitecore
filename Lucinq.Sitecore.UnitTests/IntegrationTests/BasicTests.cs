@@ -7,6 +7,7 @@ using Lucinq.SitecoreIntegration.Querying;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using NUnit.Framework;
 using Sitecore.Data;
+using Sitecore.Data.Items;
 using Sitecore.Globalization;
 
 namespace Lucinq.Sitecore.UnitTests.IntegrationTests
@@ -219,6 +220,37 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 					Assert.IsTrue(item["Display Name"].IndexOf("news", StringComparison.InvariantCultureIgnoreCase) >= 0);
 				});
 			Assert.Greater(sitecoreItemResult.Items.Count, 0);
+		}
+
+		#endregion
+
+		#region [ Single Item Tests ]
+
+		[Test]
+		public void GetFirstItem()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			queryBuilder.Setup(x => x.Field("Display Name", "news"));
+
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			Item item = sitecoreSearchResult.GetItem();
+			Console.WriteLine(item.Name);
+			Assert.IsTrue(item["Display Name"].IndexOf("news", StringComparison.InvariantCultureIgnoreCase) >= 0);
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
+		}
+
+		[Test]
+		public void GetItemOutsideIndex()
+		{
+			QueryBuilder queryBuilder = new QueryBuilder();
+			queryBuilder.Setup(x => x.Field("Display Name", "news"));
+
+			ISitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
+			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
+			Item item = sitecoreSearchResult.GetItem(int.MaxValue);
+			Assert.IsNull(item);
+			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 		}
 
 		#endregion
