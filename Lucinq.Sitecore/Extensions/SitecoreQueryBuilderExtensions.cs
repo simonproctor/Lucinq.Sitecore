@@ -104,8 +104,7 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		public static Query Language(this IQueryBuilder inputQueryBuilder, Language language, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
 			string languageString = language.CultureInfo.Name.ToLower();
-			KeywordAnalyzer keywordAnalyzer = new KeywordAnalyzer();
-			return inputQueryBuilder.Raw(SitecoreFields.Language, languageString, occur, boost, key, keywordAnalyzer);
+			return inputQueryBuilder.Keyword(SitecoreFields.Language, languageString, occur, boost, key);
 		}
 
 		public static IQueryBuilder Languages(this IQueryBuilder inputQueryBuilder, Language[] languages, BooleanClause.Occur occur = null, float? boost = null, string key = null)
@@ -120,6 +119,15 @@ namespace Lucinq.SitecoreIntegration.Extensions
 
 		#region [ Heirarchy Extensions ]
 
+		/// <summary>
+		/// Gets a query representing 
+		/// </summary>
+		/// <param name="inputQueryBuilder"></param>
+		/// <param name="ancestorId"></param>
+		/// <param name="occur"></param>
+		/// <param name="boost"></param>
+		/// <param name="key"></param>
+		/// <returns></returns>
 		public static TermQuery Ancestor(this IQueryBuilder inputQueryBuilder, ID ancestorId, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
 			string ancestorIdString = ancestorId.ToLuceneId();
@@ -166,6 +174,16 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		public static string ToLuceneId(this ID itemId)
 		{
 			return itemId.ToShortID().ToString().ToLowerInvariant();
+		}
+
+		public static string ToLuceneId(this Guid itemId)
+		{
+			return new ID(itemId).ToShortID().ToString().ToLowerInvariant();
+		}
+
+		public static string ToLuceneId(this string itemId)
+		{
+			return new ID(itemId).ToShortID().ToString().ToLowerInvariant();
 		}
 
 		#endregion
