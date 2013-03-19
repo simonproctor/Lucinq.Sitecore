@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -116,7 +117,19 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				fieldType = FieldTypes[fieldTypeKey].ToLower();
 			}
 
+			var handled = AddSpecificFieldByTypeKey(document, field, fieldTypeKey);
+
+			if (handled)
+			{
+				return;
+			}
+			AddDefaultFieldByType(document, field, fieldType);
+		}
+
+		protected virtual void AddDefaultFieldByType(Document document, Field field, string fieldType)
+		{
 			FieldConfiguration fieldConfiguration;
+			// default handling
 			switch (fieldType)
 			{
 				case "multilist":
@@ -136,6 +149,27 @@ namespace Lucinq.SitecoreIntegration.Indexing
 					AddValueField(document, field, fieldConfiguration);
 					break;
 			}
+		}
+
+		protected virtual bool AddSpecificFieldByTypeKey(Document document, Field field, string fieldTypeKey)
+		{
+			FieldConfiguration fieldConfiguration;
+			bool handled = false;
+			// specific field type handling
+			switch (fieldTypeKey)
+			{
+				case "accountsmultilist":
+					fieldConfiguration = GetFieldConfiguration(field);
+					AddMultilistField(document, field, fieldConfiguration);
+					handled = true;
+					break;
+				case "date":
+					fieldConfiguration = GetFieldConfiguration(field, false);
+					AddDateTimeField(document, field, fieldConfiguration);
+					handled = true;
+					break;
+			}
+			return handled;
 		}
 
 		protected virtual FieldConfiguration GetFieldConfiguration(Field field, bool analyze = true, bool store = false)
@@ -214,12 +248,20 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				return;
 			}
 
+			ID valueId;
+			string fieldValue = field.Value;
+			if (ID.TryParse(field.Value, out valueId))
+			{
+				fieldConfiguration.Analyze = false;
+				fieldValue = valueId.ToLuceneId();
+			}
+
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.Name.ToLower(), field.Value, fieldConfiguration.Store);
+				document.AddAnalysedField(field.Name.ToLower(), fieldValue, fieldConfiguration.Store);
 				return;
 			}
-			document.AddNonAnalysedField(field.Name.ToLower(), field.Value, fieldConfiguration.Store);
+			document.AddNonAnalysedField(field.Name.ToLower(), fieldValue, fieldConfiguration.Store);
 		}
 
 		/// <summary>
