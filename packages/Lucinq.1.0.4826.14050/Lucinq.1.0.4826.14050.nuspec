@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Lucinq</id>
-    <version>1.0.4818.18196</version>
+    <version>1.0.4826.14050</version>
     <title>Lucinq For Lucene.Net</title>
     <authors>Nathanael Mann,  Simon Proctor</authors>
     <owners>Nathanael Mann,  Simon Proctor</owners>

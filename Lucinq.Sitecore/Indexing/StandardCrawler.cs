@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -7,7 +6,6 @@ using Lucene.Net.Documents;
 using Lucinq.Building;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.Extensions;
-using Sitecore.Collections;
 using Sitecore.Data;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
@@ -23,7 +21,6 @@ namespace Lucinq.SitecoreIntegration.Indexing
 {
 	public class StandardCrawler : DatabaseCrawler
 	{
-
 		#region [ Fields ]
 
 		private static readonly Dictionary<string, string> fieldTypes = new Dictionary<string, string>();
@@ -95,7 +92,6 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			// base.AddAllFields(document, item, versionSpecific);
 		}
 
-
 		protected List<Field> GetFields(Item item)
 		{
 			return item.Fields.Where(IncludeField).ToList();
@@ -120,27 +116,36 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				fieldType = FieldTypes[fieldTypeKey].ToLower();
 			}
 
-			FieldConfiguration fieldConfiguration = new FieldConfiguration{FieldId = field.ID, Analyze = true, Store = false};
+			FieldConfiguration fieldConfiguration;
+			switch (fieldType)
+			{
+				case "multilist":
+					fieldConfiguration = GetFieldConfiguration(field);
+					AddMultilistField(document, field, fieldConfiguration);
+					break;
+				case "link":
+					fieldConfiguration = GetFieldConfiguration(field, false);
+					AddLinkField(document, field, fieldConfiguration);
+					break;
+				case "datetime":
+					fieldConfiguration = GetFieldConfiguration(field, false);
+					AddDateTimeField(document, field, fieldConfiguration);
+					break;
+				default:
+					fieldConfiguration = GetFieldConfiguration(field, false);
+					AddValueField(document, field, fieldConfiguration);
+					break;
+			}
+		}
+
+		protected virtual FieldConfiguration GetFieldConfiguration(Field field, bool analyze = true, bool store = false)
+		{
+			FieldConfiguration fieldConfiguration = new FieldConfiguration { FieldId = field.ID, Analyze = analyze, Store = store };
 			if (FieldConfigurations.ContainsKey(field.ID))
 			{
 				fieldConfiguration = FieldConfigurations[field.ID];
 			}
-			switch (fieldType)
-			{
-				case "multilist":
-					AddMultilistField(document, field, fieldConfiguration);
-					break;
-				case "link":
-					AddLinkField(document, field, fieldConfiguration);
-					break;
-				case "datetime":
-					AddDateTimeField(document, field, fieldConfiguration);
-					break;
-				default:
-					AddValueField(document, field, fieldConfiguration);
-					break;
-			}
-		
+			return fieldConfiguration;
 		}
 
 		protected virtual void AddMultilistField(Document document, MultilistField field, FieldConfiguration fieldConfiguration)

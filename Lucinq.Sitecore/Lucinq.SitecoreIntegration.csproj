@@ -37,9 +37,9 @@
     <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.2.9.4.1\lib\net40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.4818.18196, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.4826.14050, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Lucinq.1.0.4818.18196\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\packages\Lucinq.1.0.4826.14050\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Client">
       <HintPath>..\Sitecore\Sitecore.Client.dll</HintPath>
