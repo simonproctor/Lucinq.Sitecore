@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration", "Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj", "{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.UnitTests", "Lucinq.Sitecore.UnitTests\Lucinq.SitecoreIntegration.UnitTests.csproj", "{84C1B842-27B6-45ED-8063-1A27D687E1BD}"

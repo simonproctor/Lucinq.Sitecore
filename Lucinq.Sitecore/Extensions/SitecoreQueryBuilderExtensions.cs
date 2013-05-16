@@ -1,6 +1,7 @@
 ﻿using System;
 using Lucene.Net.Analysis;
 using Lucene.Net.Search;
+using Lucinq.Extensions;
 using Lucinq.Interfaces;
 using Lucinq.SitecoreIntegration.Constants;
 using Sitecore.Data;
@@ -85,7 +86,7 @@ namespace Lucinq.SitecoreIntegration.Extensions
 
 		public static Query Name(this IQueryBuilder inputQueryBuilder, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			return inputQueryBuilder.Field(SitecoreFields.Name, value, occur, boost, key);
+			return inputQueryBuilder.Term(SitecoreFields.Name, value, occur, boost, key);
 		}
 
 		public static IQueryBuilder Names(this IQueryBuilder inputQueryBuilder, string[] values, BooleanClause.Occur occur = null, float? boost = null, string key = null)
@@ -144,18 +145,28 @@ namespace Lucinq.SitecoreIntegration.Extensions
 
 		#region [ Field Extensions ]
 
-		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
+		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, string value, BooleanClause.Occur occur = null, float? boost = null, string key = null, int slop = 1)
 		{
 			if (value.Contains("*"))
 			{
-				return inputQueryBuilder.WildCard(fieldName.ToLower(), value.ToLower(), occur, boost, key);
+				return inputQueryBuilder.WildCard(GetEncodedFieldName(fieldName), value.ToLower(), occur, boost, key);
 			}
-			return inputQueryBuilder.Term(fieldName.ToLower(), value.ToLower(), occur, boost, key);
+			if (value.Contains(" "))
+			{
+				PhraseQuery phraseQuery = inputQueryBuilder.Phrase(slop, boost, occur, key);
+				string[] valueElems = value.Split(new[] {' '});
+				foreach (var valueElem in valueElems)
+				{
+					phraseQuery.AddTerm(GetEncodedFieldName(fieldName), valueElem.ToLower());	
+				}
+				return phraseQuery;
+			}
+			return inputQueryBuilder.Term(GetEncodedFieldName(fieldName), value.ToLower(), occur, boost, key);
 		}
 
 		public static Query Field(this IQueryBuilder inputQueryBuilder, string fieldName, ID value, BooleanClause.Occur occur = null, float? boost = null, string key = null)
 		{
-			return inputQueryBuilder.Term(fieldName.ToLower(), value.ToLuceneId(), occur, boost, key);
+			return inputQueryBuilder.Term(GetEncodedFieldName(fieldName), value.ToLuceneId(), occur, boost, key);
 		}
 
 		#endregion
@@ -184,6 +195,11 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		public static string ToLuceneId(this string itemId)
 		{
 			return new ID(itemId).ToShortID().ToString().ToLowerInvariant();
+		}
+
+		public static string GetEncodedFieldName(string fieldName)
+		{
+			return fieldName.Replace(" ", "_").ToLower();
 		}
 
 		#endregion

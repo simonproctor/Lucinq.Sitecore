@@ -68,7 +68,7 @@ namespace Lucinq.SitecoreIntegration.Querying
 					}
 				);
 			stopwatch.Stop();
-			return new SitecoreItemResult(items) { ElapsedTimeMs = stopwatch.ElapsedMilliseconds };
+			return new SitecoreItemResult(items) { ElapsedTimeMs = stopwatch.ElapsedMilliseconds, TotalHits = LuceneSearchResult.TotalHits};
 		}
 
 		/// <summary>

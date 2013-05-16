@@ -201,13 +201,14 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				fieldBuilder.Append(targetId.ToLuceneId());
 			}
 
+			string fieldName = SitecoreQueryBuilderExtensions.GetEncodedFieldName(field.InnerField.Name);
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name.ToLower(), fieldBuilder.ToString(), fieldConfiguration.Store);
+				document.AddAnalysedField(fieldName, fieldBuilder.ToString(), fieldConfiguration.Store);
 				return;
 			}
 
-			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), fieldBuilder.ToString(), fieldConfiguration.Store);
+			document.AddNonAnalysedField(fieldName, fieldBuilder.ToString(), fieldConfiguration.Store);
 		}
 
 		protected void AddDateTimeField(Document document, DateField field, FieldConfiguration fieldConfiguration)
@@ -217,13 +218,14 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				return;
 			}
 
+			string fieldName = SitecoreQueryBuilderExtensions.GetEncodedFieldName(field.InnerField.Name);
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name.ToLower(), DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+				document.AddAnalysedField(fieldName, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
 				return;
 			}
 
-			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
+			document.AddNonAnalysedField(fieldName, DateTools.DateToString(field.DateTime, DateTools.Resolution.MINUTE), fieldConfiguration.Store);
 		}
 
 		protected virtual void AddLinkField(Document document, LinkField field, FieldConfiguration fieldConfiguration)
@@ -233,12 +235,13 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				return;
 			}
 
+			string fieldName = SitecoreQueryBuilderExtensions.GetEncodedFieldName(field.InnerField.Name);
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.InnerField.Name.ToLower(), field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+				document.AddAnalysedField(fieldName, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
 				return;
 			}
-			document.AddNonAnalysedField(field.InnerField.Name.ToLower(), field.TargetID.ToLuceneId(), fieldConfiguration.Store);
+			document.AddNonAnalysedField(fieldName, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
 		}
 
 		protected virtual void AddValueField(Document document, Field field, FieldConfiguration fieldConfiguration)
@@ -256,12 +259,13 @@ namespace Lucinq.SitecoreIntegration.Indexing
 				fieldValue = valueId.ToLuceneId();
 			}
 
+			string fieldName = SitecoreQueryBuilderExtensions.GetEncodedFieldName(field.Name);
 			if (fieldConfiguration.Analyze)
 			{
-				document.AddAnalysedField(field.Name.ToLower(), fieldValue, fieldConfiguration.Store);
+				document.AddAnalysedField(fieldName, fieldValue, fieldConfiguration.Store);
 				return;
 			}
-			document.AddNonAnalysedField(field.Name.ToLower(), fieldValue, fieldConfiguration.Store);
+			document.AddNonAnalysedField(fieldName, fieldValue, fieldConfiguration.Store);
 		}
 
 		/// <summary>

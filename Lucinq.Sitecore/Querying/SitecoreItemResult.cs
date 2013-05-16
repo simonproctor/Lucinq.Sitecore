@@ -21,6 +21,8 @@ namespace Lucinq.SitecoreIntegration.Querying
 
 		public long ElapsedTimeMs { get; set; }
 
+		public int TotalHits { get; set; }
+
 		#endregion
 	}
 }
