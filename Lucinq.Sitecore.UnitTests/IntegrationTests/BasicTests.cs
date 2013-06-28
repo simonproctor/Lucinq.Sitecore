@@ -173,6 +173,21 @@ namespace Lucinq.Sitecore.UnitTests.IntegrationTests
 			Assert.Greater(sitecoreItemResult.Items.Count, 0);
 		}
 
+		[Ignore("For Load Testing Use Only")]
+		[Test]
+		public void RepeatedTest()
+		{
+			for (var i = 0; i < 1000; i++)
+			{
+				GetByName();
+			}
+
+			for (var i = 0; i < 1000; i++)
+			{
+				GetByNameWildCard();
+			}
+		}
+
 		[Test]
 		public void GetByLanguage()
 		{

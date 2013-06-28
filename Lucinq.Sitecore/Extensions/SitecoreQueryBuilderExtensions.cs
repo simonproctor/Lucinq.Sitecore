@@ -19,11 +19,12 @@ namespace Lucinq.SitecoreIntegration.Extensions
 			return inputQueryBuilder.Term(SitecoreFields.Id, luceneItemId, occur, boost, key);
 		}
 
-		public static IQueryBuilder Ids(this IQueryBuilder inputQueryBuilder, ID[] itemIds, float? boost = null, BooleanClause.Occur occur = null, string key = null)
+		public static IQueryBuilder Ids(this IQueryBuilder inputQueryBuilder, ID[] itemIds, float? boost = null, BooleanClause.Occur occur = null, BooleanClause.Occur childrenOccur = null, string key = null)
 		{
+			var group = inputQueryBuilder.Group(occur);
 			foreach (ID itemId in itemIds)
 			{
-				inputQueryBuilder.TemplateId(itemId, occur, boost, key);
+				group.Id(itemId, childrenOccur, boost, key);
 			}
 			return inputQueryBuilder;
 		}
@@ -56,11 +57,12 @@ namespace Lucinq.SitecoreIntegration.Extensions
 		/// <param name="occur"></param>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public static IQueryBuilder TemplateIds(this IQueryBuilder inputQueryBuilder, ID[] templateIds, float? boost = null, BooleanClause.Occur occur = null, string key = null)
+		public static IQueryBuilder TemplateIds(this IQueryBuilder inputQueryBuilder, ID[] templateIds, float? boost = null, BooleanClause.Occur occur = null, BooleanClause.Occur childrenOccur = null, string key = null)
 		{
+			var group = inputQueryBuilder.Group(occur);
 			foreach (ID templateId in templateIds)
 			{
-				inputQueryBuilder.TemplateId(templateId, occur, boost, key);
+				group.TemplateId(templateId, childrenOccur, boost, key);
 			}
 			return inputQueryBuilder;
 		}
