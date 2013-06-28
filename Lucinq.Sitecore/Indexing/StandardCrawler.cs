@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using HtmlAgilityPack;
 using Lucene.Net.Documents;
 using Lucinq.Building;
 using Lucinq.SitecoreIntegration.Constants;
@@ -158,6 +160,10 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			// specific field type handling
 			switch (fieldTypeKey)
 			{
+				case "rich text":
+					fieldConfiguration = GetFieldConfiguration(field);
+					AddValueField(document, field, fieldConfiguration, true);
+					break;
 				case "accountsmultilist":
 					fieldConfiguration = GetFieldConfiguration(field);
 					AddMultilistField(document, field, fieldConfiguration);
@@ -244,7 +250,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
 			document.AddNonAnalysedField(fieldName, field.TargetID.ToLuceneId(), fieldConfiguration.Store);
 		}
 
-		protected virtual void AddValueField(Document document, Field field, FieldConfiguration fieldConfiguration)
+		protected virtual void AddValueField(Document document, Field field, FieldConfiguration fieldConfiguration, bool stripHtml = false)
 		{
 			if (field == null || fieldConfiguration == null)
 			{
@@ -253,6 +259,14 @@ namespace Lucinq.SitecoreIntegration.Indexing
 
 			ID valueId;
 			string fieldValue = field.Value;
+
+			if (stripHtml && !String.IsNullOrEmpty(fieldValue))
+			{
+				var htmlDoc = new HtmlDocument();
+				htmlDoc.LoadHtml(fieldValue);
+				fieldValue = htmlDoc.DocumentNode.InnerText;
+			}
+
 			if (ID.TryParse(field.Value, out valueId))
 			{
 				fieldConfiguration.Analyze = false;
