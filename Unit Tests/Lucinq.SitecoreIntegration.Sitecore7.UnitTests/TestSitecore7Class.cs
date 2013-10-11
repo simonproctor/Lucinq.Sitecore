@@ -1,4 +1,5 @@
 ﻿using Sitecore.ContentSearch.SearchTypes;
+using Sitecore.Data;
 
 namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
 {

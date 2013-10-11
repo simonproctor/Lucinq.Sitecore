@@ -9,7 +9,7 @@ using Lucinq.Interfaces;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.ContentSearch;
 
-namespace Lucinq.SitecoreIntegration.Extensions.Sitecore7
+namespace Lucinq.SitecoreIntegration.Sitecore7.Extensions
 {
     public static class FieldExtensions
     {

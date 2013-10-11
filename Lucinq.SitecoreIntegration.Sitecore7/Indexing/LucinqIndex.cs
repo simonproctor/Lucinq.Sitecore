@@ -2,7 +2,7 @@
 using Sitecore.ContentSearch.LuceneProvider;
 using Sitecore.ContentSearch.Maintenance;
 
-namespace Lucinq.SitecoreIntegration.Indexing
+namespace Lucinq.SitecoreIntegration.Sitecore7.Indexing
 {
     public class LucinqIndex : LuceneIndex
     {

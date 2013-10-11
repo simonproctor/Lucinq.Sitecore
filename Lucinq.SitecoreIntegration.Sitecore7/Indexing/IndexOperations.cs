@@ -4,6 +4,7 @@ using System.Linq;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucinq.Building;
+using Lucinq.SitecoreIntegration.Indexing;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Diagnostics;
 using Sitecore.ContentSearch.LuceneProvider;
@@ -11,7 +12,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Field = Sitecore.Data.Fields.Field;
 
-namespace Lucinq.SitecoreIntegration.Indexing
+namespace Lucinq.SitecoreIntegration.Sitecore7.Indexing
 {
     public class IndexOperations : IndexingHelper, IIndexOperations
     {
