@@ -17,15 +17,18 @@ namespace Lucinq.SitecoreIntegration.Querying
 	{
 		#region [ Constructors ]
 
-		public SitecoreSearchResult(ILuceneSearchResult searchResult, IDatabaseHelper databaseHelper)
+		public SitecoreSearchResult(ILuceneSearchResult searchResult, IDatabaseHelper databaseHelper, SitecoreMode sitecoreMode)
 		{
 			DatabaseHelper = databaseHelper;
 			LuceneSearchResult = searchResult;
+		    SitecoreMode = sitecoreMode;
 		}
 
 		#endregion
 
 		#region [ Properties ]
+
+        public SitecoreMode SitecoreMode { get; private set; }
 
 		public IDatabaseHelper DatabaseHelper { get; private set; }
 
@@ -107,6 +110,10 @@ namespace Lucinq.SitecoreIntegration.Querying
 			Language itemLanguage = Language.Parse(language);
 
 			Item item = DatabaseHelper.GetItem(itemId, itemLanguage);
+		    if (item == null)
+		    {
+		        return null;
+		    }
 			return item.Versions.Count > 0 ? item : null;
 		}
 

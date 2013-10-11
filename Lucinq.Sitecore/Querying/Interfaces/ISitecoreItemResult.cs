@@ -3,7 +3,7 @@ using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 {
-	public interface ISitecoreItemResult
+	public interface ISitecoreItemResult : IEnumerable<Item>
 	{
 		List<Item> Items { get; }
 		
