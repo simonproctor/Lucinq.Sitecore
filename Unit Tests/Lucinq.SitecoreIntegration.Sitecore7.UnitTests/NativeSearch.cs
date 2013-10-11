@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using Lucene.Net.Store;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
 using Lucinq.SitecoreIntegration.Querying;
@@ -13,6 +13,7 @@ using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data;
 using Sitecore.Pipelines;
 using Sitecore.SecurityModel;
+using Directory = System.IO.Directory;
 
 namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
 {
@@ -20,7 +21,9 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
     public class NativeSearch
     {
         private SitecoreSearch sitecoreSearch;
+        private SitecoreSearch undisposedSitecoreSearch;
         private static ID makesPageId = new ID("{CF059C5C-DE5B-4C6B-9794-C00CE5A5F140}");
+        private FSDirectory directory;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
@@ -29,7 +32,14 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             CorePipeline.Run("initialize", new PipelineArgs());
             Console.WriteLine("Initialized");
             sitecoreSearch = new SitecoreSearch(Sitecore.Configuration.Settings.IndexFolder + "\\lucinq_master_index", new DatabaseHelper("master"));
-            
+            directory = FSDirectory.Open(Sitecore.Configuration.Settings.IndexFolder + "\\lucinq_master_index");
+            undisposedSitecoreSearch = new SitecoreSearch(directory, new DatabaseHelper("master"));
+        }
+
+        [TestFixtureTearDown]
+        public void TestFixtureTearDown()
+        {
+            directory.Dispose();
         }
 
         [Test]
@@ -45,6 +55,12 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
         }
 
         [Test]
+        public void LucinqUndisposedEquivalent()
+        {
+            GetLucinqEquivalentUndisposedResults("Ford");
+        }
+
+        [Test]
         public void RepeatedLucinqResults()
         {
             LucinqEquivalent();
@@ -52,6 +68,16 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             LucinqEquivalent();
             LucinqEquivalent();
             LucinqEquivalent();
+        }
+
+        [Test]
+        public void RepeatedLucinqUndisposedResults()
+        {
+            LucinqUndisposedEquivalent();
+            LucinqUndisposedEquivalent();
+            LucinqUndisposedEquivalent();
+            LucinqUndisposedEquivalent();
+            LucinqUndisposedEquivalent();
         }
 
         [Test]
@@ -82,6 +108,16 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             GetLucinqProperResults("Mazda");
             GetLucinqProperResults("Audi");
             GetLucinqProperResults("Bmw");
+        }
+
+        [Test]
+        public void RepeatedMixedProperUndisposedResults()
+        {
+            GetLucinqEquivalentUndisposedResults("Ford");
+            GetLucinqEquivalentUndisposedResults("Volkswagen");
+            GetLucinqEquivalentUndisposedResults("Mazda");
+            GetLucinqEquivalentUndisposedResults("Audi");
+            GetLucinqEquivalentUndisposedResults("Bmw");
         }
 
         [Test]
@@ -135,6 +171,22 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             queryBuilder.Term<SearchResultItem>(t => t.Name, itemName);
             Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
             var result = sitecoreSearch.Execute(queryBuilder);
+            Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
+            foreach (var searchResultItem in result.GetPagedItems(0, 50))
+            {
+                Console.WriteLine(searchResultItem.Name);
+            }
+            Console.WriteLine("Done: {0}\r\n", stopWatch.ElapsedMilliseconds);
+        }
+
+        private void GetLucinqEquivalentUndisposedResults(string itemName)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            SitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder(t => t.DescendantOf(SitecoreIds.HomeItemId), t => t.TemplateId(SitecoreIds.AdvertTemplateId));
+            queryBuilder.Term<SearchResultItem>(t => t.Name, itemName);
+            Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
+            var result = undisposedSitecoreSearch.Execute(queryBuilder);
             Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
             foreach (var searchResultItem in result.GetPagedItems(0, 50))
             {

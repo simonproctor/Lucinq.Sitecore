@@ -1,5 +1,6 @@
 ﻿using System;
 using Lucene.Net.Search;
+using Lucene.Net.Store;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
@@ -30,7 +31,12 @@ namespace Lucinq.SitecoreIntegration.Querying
 		{
 			
 		}
-		
+
+        public SitecoreSearch(Directory directory, IDatabaseHelper databaseHelper) : this(new LuceneSearch(directory), databaseHelper)
+        {
+            DatabaseHelper = databaseHelper;
+        }
+
 		public SitecoreSearch(ILuceneSearch<LuceneSearchResult> luceneSearch, IDatabaseHelper databaseHelper)
 		{
 			LuceneSearch = luceneSearch;
