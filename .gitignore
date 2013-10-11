@@ -1,12 +1,16 @@
 .svn
-/Lucinq.Sitecore/obj
-/Lucinq.Sitecore/bin
-/Lucinq.GlassMapper.Sitecore/obj
-/Lucinq.GlassMapper.Sitecore/bin
-/Unit Tests/Lucinq.Sitecore.UnitTests/obj
-/Unit Tests/Lucinq.Sitecore.UnitTests/bin
-/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj
-/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin
+Lucinq.Sitecore/obj
+Lucinq.Sitecore/bin
+Lucinq.GlassMapper.Sitecore/obj
+Lucinq.GlassMapper.Sitecore/bin
+Unit Tests/Lucinq.Sitecore.UnitTests/obj
+Unit Tests/Lucinq.Sitecore.UnitTests/bin
+Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/obj
+Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin
+Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj
+Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin
+Lucinq.SitecoreIntegration.Sitecore7/obj
+Lucinq.SitecoreIntegration.Sitecore7/bin
 /Sitecore/ComponentArt.UIFramework.lic
 /Sitecore/ComponentArt.Web.UI.dll
 /Sitecore/HtmlAgilityPack.dll
