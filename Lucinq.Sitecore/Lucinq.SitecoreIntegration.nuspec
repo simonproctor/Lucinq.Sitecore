@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Lucinq.Sitecore7</id>
     <version>$version$</version>
-    <title>Sitecore extensions for Lucinq For Lucene.Net</title>
+    <title>Sitecore 7 extensions for Lucinq For Lucene.Net</title>
     <authors>Nathanael Mann, Simon Proctor</authors>
     <owners>cardinal252</owners>
     <licenseUrl>http://www.gnu.org/licenses/</licenseUrl>
@@ -13,7 +13,7 @@
     <copyright>Copyright 2013 Cardinal IT Solutions Ltd</copyright>
     <tags>lucene.net lucene sitecore lucinq text search information retrieval query</tags>
     <dependencies>
-        <dependency id="Lucene.Net" version="[2.9.4.1]"/>
+        <dependency id="Lucene.Net" version="3.0.3"/>
         <dependency id="Lucinq" version="1.0.4826.14050"/>
     </dependencies>
   </metadata>
