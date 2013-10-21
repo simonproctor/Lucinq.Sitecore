@@ -16,5 +16,11 @@
         <dependency id="Lucene.Net" version="3.0.3"/>
         <dependency id="Lucinq-30" version="1.0.5032.19332"/>
     </dependencies>
+	<references>
+      <reference file="Lucinq.SitecoreIntegration.dll" />
+    </references>
   </metadata>
+  <files>
+	<file src="bin\$configuration$\Lucinq.SitecoreIntegration.dll" target="lib\net45"/>
+  </files>
 </package>
