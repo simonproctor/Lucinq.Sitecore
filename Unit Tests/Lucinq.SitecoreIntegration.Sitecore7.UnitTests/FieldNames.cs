@@ -1,6 +1,7 @@
 ﻿using Lucinq.Extensions;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
+using Lucinq.SitecoreIntegration.Extensions;
 using Lucinq.SitecoreIntegration.Querying;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Lucinq.SitecoreIntegration.Sitecore7.Extensions;
@@ -48,6 +49,43 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
         }
 
         [Test]
+        public void Terms()
+        {
+            ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
+            queryBuilder.Terms<TestSitecore7Class>(t => t.Content, new[] { "value", "value2" });
+
+            IQueryBuilder queryBuilder2 = new QueryBuilder();
+            queryBuilder2.Terms("_content", new []{ "value", "value2"});
+
+            Assert.AreEqual(queryBuilder2.Build().ToString(), queryBuilder.Build().ToString());
+        }
+
+        [Test]
+        public void Keyword()
+        {
+            ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
+            queryBuilder.Keyword<TestSitecore7Class>(t => t.Content, "value");
+
+            IQueryBuilder queryBuilder2 = new QueryBuilder();
+            queryBuilder2.Keyword("_content", "value");
+
+            Assert.AreEqual(queryBuilder2.Build().ToString(), queryBuilder.Build().ToString());
+        }
+
+
+        [Test]
+        public void FieldById()
+        {
+            ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
+            queryBuilder.Field<TestSitecore7Class>(t => t.Content, SitecoreIds.HomeItemId);
+
+            IQueryBuilder queryBuilder2 = new QueryBuilder();
+            queryBuilder2.Term("_content", SitecoreIds.HomeItemId.ToLuceneId());
+
+            Assert.AreEqual(queryBuilder2.Build().ToString(), queryBuilder.Build().ToString());
+        }
+
+        [Test]
         public void Fuzzy()
         {
             ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
@@ -77,11 +115,23 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
         [Test]
         public void WildCard()
         {
-            IQueryBuilder queryBuilder = new QueryBuilder();
+            ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
             queryBuilder.WildCard<TestSitecore7Class>(t => t.Content, "value*");
 
             IQueryBuilder queryBuilder2 = new QueryBuilder();
             queryBuilder2.WildCard("_content", "value*");
+
+            Assert.AreEqual(queryBuilder2.Build().ToString(), queryBuilder.Build().ToString());
+        }
+
+        [Test]
+        public void WildCards()
+        {
+            ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
+            queryBuilder.WildCards<TestSitecore7Class>(t => t.Content, new[] {"value*", "value1*"});
+
+            IQueryBuilder queryBuilder2 = new QueryBuilder();
+            queryBuilder2.WildCards("_content", new[] { "value*", "value1*" });
 
             Assert.AreEqual(queryBuilder2.Build().ToString(), queryBuilder.Build().ToString());
         }

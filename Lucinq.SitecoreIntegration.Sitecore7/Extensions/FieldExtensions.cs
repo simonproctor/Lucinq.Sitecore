@@ -6,8 +6,10 @@ using Lucene.Net.Index;
 using Lucene.Net.Search;
 using Lucinq.Enums;
 using Lucinq.Interfaces;
+using Lucinq.SitecoreIntegration.Querying;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.ContentSearch;
+using Sitecore.Data;
 
 namespace Lucinq.SitecoreIntegration.Sitecore7.Extensions
 {
@@ -21,14 +23,32 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Extensions
             return queryBuilder.Term(GetFieldName(expression), fieldValue, occur, boost, key, caseSensitive);
         }
 
+        public static Query Field<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression, ID fieldValue, Matches occur = Matches.NotSet, float? boost = null,
+    string key = null, bool? caseSensitive = null)
+        {
+            return queryBuilder.Field(GetFieldName(expression), fieldValue, occur, boost, key);
+        }
+
+        public static IQueryBuilder Terms<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression, string[] fieldValues, Matches occur = Matches.NotSet, float? boost = null,
+            string key = null, bool? caseSensitive = null)
+        {
+            return queryBuilder.Terms(GetFieldName(expression), fieldValues, occur, boost, caseSensitive);
+        }
+
         #endregion
 
         #region [ WildCard ]
 
-        public static WildcardQuery WildCard<T>(this IQueryBuilderIndividual queryBuilder, Expression<Func<T, object>> expression, string fieldValue, Matches occur = Matches.NotSet, float? boost = null,
+        public static WildcardQuery WildCard<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression, string fieldValue, Matches occur = Matches.NotSet, float? boost = null,
             string key = null, bool? caseSensitive = null)
         {
             return queryBuilder.WildCard(GetFieldName(expression), fieldValue, occur, boost, key, caseSensitive);
+        }
+
+        public static IQueryBuilder WildCards<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression, string[] fieldValues, Matches occur = Matches.NotSet, float? boost = null,
+    string key = null, bool? caseSensitive = null)
+        {
+            return queryBuilder.WildCards(GetFieldName(expression), fieldValues, occur, boost, caseSensitive);
         }
 
         #endregion
@@ -168,6 +188,16 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Extensions
             var indexFieldAttribute = prop.GetCustomAttribute<IndexFieldAttribute>(true);
 
             return indexFieldAttribute != null ? indexFieldAttribute.IndexFieldName : prop.Name.ToLowerInvariant();
+        }
+
+        #endregion
+
+        #region [ Sorting ]
+
+        public static IQueryBuilder Sort<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression,
+            bool sortDescending = false, int? sortType = null)
+        {
+            return queryBuilder.Sort(GetFieldName(expression), sortDescending, sortType);
         }
 
         #endregion
