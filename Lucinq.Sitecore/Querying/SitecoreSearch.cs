@@ -1,4 +1,5 @@
 ﻿using System;
+using Lucene.Net.Documents;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 using Lucinq.Interfaces;
@@ -6,10 +7,11 @@ using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
 using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
 using Lucinq.SitecoreIntegration.Querying.Interfaces;
+using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreSearch : ISitecoreSearch
+	public class SitecoreSearch : LuceneItemSearch<SitecoreSearchResult, Item>
 	{
 		#region [ Constructors ]
 
@@ -27,30 +29,21 @@ namespace Lucinq.SitecoreIntegration.Querying
 		/// </summary>
 		/// <param name="indexPath"></param>
 		/// <param name="databaseHelper"></param>
-		public SitecoreSearch(string indexPath, IDatabaseHelper databaseHelper) : this(new LuceneSearch(indexPath), databaseHelper)
+        public SitecoreSearch(string indexPath, IDatabaseHelper databaseHelper)
+            : base(indexPath)
 		{
-			
+            DatabaseHelper = databaseHelper;
 		}
 
-        public SitecoreSearch(Directory directory, IDatabaseHelper databaseHelper) : this(new LuceneSearch(directory), databaseHelper)
+        public SitecoreSearch(Directory directory, IDatabaseHelper databaseHelper)
+            : base(directory)
         {
             DatabaseHelper = databaseHelper;
         }
 
-		public SitecoreSearch(ILuceneSearch<LuceneSearchResult> luceneSearch, IDatabaseHelper databaseHelper)
-		{
-			LuceneSearch = luceneSearch;
-			DatabaseHelper = databaseHelper;
-		}
-
 		#endregion
 
 		#region [ Properties ]
-
-		/// <summary>
-		/// Gets the lucinq lucene search object
-		/// </summary>
-		public ILuceneSearch<LuceneSearchResult> LuceneSearch { get; private set; }
 
 		/// <summary>
 		/// Gets the database helper object
@@ -59,24 +52,9 @@ namespace Lucinq.SitecoreIntegration.Querying
 
 		#endregion
 
-		#region [ Methods ]
-
-        public ISitecoreSearchResult Execute(Query query, int noOfResults = Int32.MaxValue - 1, Sort sort = null, SitecoreMode sitecoreMode = SitecoreMode.Lucinq)
-		{
-			var luceneResult = LuceneSearch.Execute(query, noOfResults, sort);
-            return new SitecoreSearchResult(luceneResult, DatabaseHelper, sitecoreMode) { ElapsedTimeMs = luceneResult.ElapsedTimeMs };
-		}
-
-        public ISitecoreSearchResult Execute(ISitecoreQueryBuilder queryBuilder, int noOfResults = Int32.MaxValue - 1, Sort sort = null)
-        {
-            return Execute(queryBuilder.Build(), noOfResults, sort, queryBuilder.SitecoreMode);
-        }
-
-        public ISitecoreSearchResult Execute(IQueryBuilder queryBuilder, int noOfResults = Int32.MaxValue - 1, Sort sort = null, SitecoreMode sitecoreMode = SitecoreMode.Lucinq)
-		{
-            return Execute(queryBuilder.Build(), noOfResults, sort, sitecoreMode);
-		}
-
-		#endregion
+	    protected override SitecoreSearchResult GetItemCreator(ILuceneSearchResult searchResult)
+	    {
+	        return new SitecoreSearchResult(searchResult, DatabaseHelper);
+	    }
 	}
 }

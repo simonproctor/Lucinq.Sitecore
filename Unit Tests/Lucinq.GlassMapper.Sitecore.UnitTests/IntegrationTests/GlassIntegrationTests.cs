@@ -64,7 +64,7 @@ namespace Lucinq.GlassMapper.Sitecore.UnitTests.IntegrationTests
 	    {
             ISitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder();
             queryBuilder.Field<PageContent>(t => t.PageTitle, "ford");
-            ISearchResult<PageContent> sitecoreSearchResult = new GlassSearchResult<PageContent>(service, search.Execute(queryBuilder));
+            var sitecoreSearchResult = new GlassSearchResult<PageContent>(service, search.Execute(queryBuilder));
             IItemResult<PageContent> result = sitecoreSearchResult.GetPagedItems(0, 19);
             Assert.AreEqual(20, result.Items.Count);
             foreach (PageContent item in result)

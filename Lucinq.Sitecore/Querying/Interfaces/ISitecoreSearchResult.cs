@@ -1,4 +1,5 @@
-﻿using Lucinq.Interfaces;
+﻿using Lucene.Net.Documents;
+using Lucinq.Interfaces;
 using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying.Interfaces

@@ -60,9 +60,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.5036.32919, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.5044.26752, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Lucinq-30.1.0.5036.32919\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\packages\Lucinq-30.1.0.5044.26752\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
