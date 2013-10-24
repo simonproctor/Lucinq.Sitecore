@@ -3,7 +3,7 @@
   <metadata>
     <id>Lucinq.Glass.Sitecore7</id>
     <version>$version$</version>
-    <title>Lucinq integration for Sitecore 7</title>
+    <title>Lucinq and Glass integration for Sitecore 7</title>
     <authors>Nathanael Mann</authors>
     <owners>cardinal252</owners>
     <licenseUrl>http://www.gnu.org/licenses/</licenseUrl>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2013 Cardinal IT Solutions Ltd</copyright>
     <tags>glass.sitecore.mapper glass mapper lucene.net lucene sitecore lucinq text search information retrieval query</tags>
     <dependencies>
-        <dependency id="Lucinq.SitecoreIntegration" version="1.0.4808"/>
+        <dependency id="Lucinq.Sitecore7" version="1.0.4808"/>
         <dependency id="Lucene.Net" version="[2.9.4.1]"/>
         <dependency id="Lucinq" version="1.0.4825"/>
         <dependency id="Glass.Sitecore.Mapper" version="2.0.11"/>
