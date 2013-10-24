@@ -52,3 +52,4 @@ Lucinq.SitecoreIntegration.Sitecore7/bin
 /Sitecore/sitecore.nexus.dll
 Lucinq.Glass.SitecoreIntegration.v11.suo
 Lucinq.SitecoreIntegration.Sitecore7/buildnuget.bat
+Lucinq.GlassMapper.Sitecore/buildnuget.bat
