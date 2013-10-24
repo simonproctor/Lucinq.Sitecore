@@ -7,7 +7,7 @@
     <authors>Nathanael Mann</authors>
     <owners>cardinal252</owners>
     <licenseUrl>http://www.gnu.org/licenses/</licenseUrl>
-    <projectUrl>https://github.com/cardinal252/Lucinq.Glass.Sitecore</projectUrl>
+    <projectUrl>https://github.com/cardinal252/Lucinq.Sitecore</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Glass extensions for Lucinq Sitecore Integration</description>
     <releaseNotes>Initial Release.</releaseNotes>
