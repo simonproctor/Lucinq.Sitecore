@@ -8,7 +8,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Indexing
     {
         #region [ Fields ]
 
-        private string[] rootPaths;
+        private readonly string rootPaths;
 
         #endregion
 
@@ -16,30 +16,37 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Indexing
 
         public LucinqIndex(string name, string folder, IIndexPropertyStore propertyStore, string rootPaths) : base(name, folder, propertyStore)
         {
-            SetRootPaths(rootPaths);
+            this.rootPaths = rootPaths;
         }
 
         #endregion
 
         #region [ Properties ]
 
-        public override IIndexOperations Operations
+        // this is 'new' cause sitecore changed their api between versions - later versions are virtual, earlier release's were not.
+        public new virtual IIndexOperations Operations
         {
-            get { return new IndexOperations(this, rootPaths); }
+            get
+            {
+                string[] rootPathArray = GetRootPaths(rootPaths);
+                return new IndexOperations(this, rootPathArray);
+            }
         }
 
         #endregion
 
         #region [ Methods ]
 
-        protected void SetRootPaths(string input)
+        protected virtual string[] GetRootPaths(string input)
         {
+            string[] rootPathArray;
             if (input.Contains("|"))
             {
-                rootPaths = input.Split('|');
-                return;
+                rootPathArray = input.Split('|');
+                return rootPathArray;
             }
-            rootPaths = new[] {input};
+            rootPathArray = new[] { input };
+            return rootPathArray;
         }
 
         
