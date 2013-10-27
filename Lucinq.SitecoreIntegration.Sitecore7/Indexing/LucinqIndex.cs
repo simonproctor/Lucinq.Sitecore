@@ -24,7 +24,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Indexing
         #region [ Properties ]
 
         // this is 'new' cause sitecore changed their api between versions - later versions are virtual, earlier release's were not.
-        public new virtual IIndexOperations Operations
+        public override IIndexOperations Operations
         {
             get
             {
