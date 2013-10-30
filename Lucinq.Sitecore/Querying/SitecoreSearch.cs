@@ -1,12 +1,8 @@
-﻿using System;
-using Lucene.Net.Documents;
-using Lucene.Net.Search;
-using Lucene.Net.Store;
+﻿using Lucene.Net.Store;
 using Lucinq.Interfaces;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.DatabaseManagement;
 using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
-using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.Data.Items;
 
 namespace Lucinq.SitecoreIntegration.Querying
