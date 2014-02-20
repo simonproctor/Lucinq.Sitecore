@@ -1,6 +1,12 @@
 Lucinq.Sitecore - A Fluent / Expressive API for Lucene.Net With Sitecore
 =================================================
 
+This product has now been integrated into the lucinq main repo
+==============================================================
+
+Please visit https://github.com/cardinal252/Lucinq/wiki/Sitecore for more information
+
+
 This project is based upon Lucene.Net and aims to give fluent style API to Lucene.Net used from the standard Sitecore indexes. The primary purpose of which is to make Lucene a little less verbose 
 to accomplish most tasks whilst retaining the power and speed of Lucene. It has been designed with the goal with driving the
 existing lucene API, and keeping the abstraction to a minimum.
@@ -10,115 +16,6 @@ For more information on the associated projects
 - https://github.com/cardinal252/Lucinq.Glass.Sitecore
 - https://github.com/cardinal252/Lucinq.Sitecore
 
-Features
-========
-
-- A fluent style api for working with lucene queries for most of the query types and grouping.
-- Lucene based paging
-- Lucene based sorting
-- Query by (including but not limited to) - Name (including wildcards), Direct Template, Base Template, Ancestor, Parent, Language or any combination
-- Query manipulation - remove terms and re-run for example.
-
-Support
-=======
-
-Currently only supports Sitecore 6.6
-
-NuGet
-=====
-
-Get it now from Nuget https://nuget.org/packages/Lucinq.SitecoreIntegration/
-
-PM> Install-Package Lucinq.SitecoreIntegration
-
-Getting Started
-===============
-
-- Copy the binaries from sitecore to the /sitecore folder
-- Compile the project
-- Modify the constants in the unit tests to use your own sitecore installation
-- Run the index rebuild unit test to build the index
-- Examine and run the other unit tests at your leisure
-
-Sitecore Configuration
-======================
-
-```
-<index id="TestSearchIndex" type="Sitecore.Search.Index, Sitecore.Kernel">
-	<param desc="name">$(id)</param>
-	<param desc="folder">$(id)</param>
-	<Analyzer ref="search/analyzer"/>
-	<locations hint="list:AddCrawler">
-		<master type="Lucinq.SitecoreIntegration.Indexing.StandardCrawler, Lucinq.SitecoreIntegration">
-			<Database>master</Database>
-			<Root>/sitecore/content/Sites/</Root>
-			<IndexAllFields>true</IndexAllFields>
-		</master>
-		<web type="Lucinq.SitecoreIntegration.Indexing.StandardCrawler, Lucinq.SitecoreIntegration">
-			<Database>web</Database>
-			<Root>/sitecore/content/Sites/</Root>
-			<IndexAllFields>true</IndexAllFields>
-		</web>
-	</locations>
-</index>
-```
-
-Example Syntax
-==============
-
-Further examples can be found in the integration tests, however here is a quick overview of how the syntax looks
-```C#
-SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
-
-IQueryBuilder query = new QueryBuilder();
-
-query.Name("itemname");
-
-SitecoreSearchResult results = search.Execute(query.Build());	
-
-SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
-sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
-```
-
-OR - By Template
-
-```C#
-SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
-
-ID templateId = new ID("{8A255FA5-4198-4FAA-B56D-3DF6116F9342}");
-
-IQueryBuilder query = new QueryBuilder();
-
-query.Setup(
-	x => x.TemplateId(templateId)
-);
-
-SitecoreSearchResult results = search.Execute(query.Build());
-
-SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
-sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
-```
-
-OR - By Language
-
-```C#
-SitecoreSearch search = new SitecoreSearch(indexPath, new DataBaseHelper()));
-
-Language language = Language.Parse("de-de");
-
-IQueryBuilder query = new QueryBuilder();
-
-query.Setup(
-	x => x.Language(language),
-	x => x.Name("itemname")
-);
-
-SitecoreSearchResult results = search.Execute(query.Build());
-
-SitecoreItemResult sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
-sitecoreItemResult.Items.ForEach(item => Console.WriteLine(item["My Property"]));
-
-```
 
 License
 =======
