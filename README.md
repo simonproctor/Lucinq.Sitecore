@@ -1,7 +1,10 @@
 Lucinq.Sitecore - A Fluent / Expressive API for Lucene.Net With Sitecore
 =================================================
 
-This product has now been integrated into the lucinq main repo
+The documentation for lucinq and sitecore can now be found in the main lucinq wiki
+
+https://github.com/cardinal252/Lucinq/wiki
+
 ==============================================================
 
 Please visit https://github.com/cardinal252/Lucinq/wiki/Sitecore for more information
