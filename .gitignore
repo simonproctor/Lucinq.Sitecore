@@ -11,45 +11,21 @@ Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj
 Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin
 Lucinq.SitecoreIntegration.Sitecore7/obj
 Lucinq.SitecoreIntegration.Sitecore7/bin
-/Sitecore/ComponentArt.UIFramework.lic
-/Sitecore/ComponentArt.Web.UI.dll
-/Sitecore/HtmlAgilityPack.dll
-/Sitecore/ITHit.WebDAV.Server.dll
-/Sitecore/Lucene.Net.dll
-/Sitecore/Mvp.Xml.dll
-/Sitecore/Newtonsoft.Json.dll
-/Sitecore/RadEditor.Net2.dll
-/Sitecore/Sitecore.Analytics.dll
-/Sitecore/Sitecore.Apps.Loader.dll
-/Sitecore/Sitecore.Automation.MarketingAutomation.dll
-/Sitecore/Sitecore.Client.XML
-/Sitecore/Sitecore.Client.dll
-/Sitecore/Sitecore.Kernel.dll
-/Sitecore/Sitecore.Kernel.xml
-/Sitecore/Sitecore.Logging.dll
-/Sitecore/Sitecore.Mvc.Analytics.dll
-/Sitecore/Sitecore.Mvc.DeviceSimulator.dll
-/Sitecore/Sitecore.Mvc.ExperienceEditor.dll
-/Sitecore/Sitecore.Mvc.dll
-/Sitecore/Sitecore.NVelocity.dll
-/Sitecore/Sitecore.Oracle.dll
-/Sitecore/Sitecore.Publishing.WebDeploy.dll
-/Sitecore/Sitecore.Rocks.Server.HedgehogDevelopment.Diagrammer.dll
-/Sitecore/Sitecore.Rocks.Server.dll
-/Sitecore/Sitecore.Security.AntiCsrf.dll
-/Sitecore/Sitecore.SegmentBuilder.dll
-/Sitecore/Sitecore.Shell.MarketingAutomation.dll
-/Sitecore/Sitecore.Update.dll
-/Sitecore/Sitecore.Zip.dll
-/Sitecore/Stimulsoft.Base.dll
-/Sitecore/Stimulsoft.Database.dll
-/Sitecore/Stimulsoft.Report.Web.dll
-/Sitecore/Stimulsoft.Report.WebDesign.dll
-/Sitecore/Stimulsoft.Report.dll
-/Sitecore/Telerik.Web.UI.Skins.dll
-/Sitecore/Telerik.Web.UI.dll
-/Sitecore/Telerik.Web.UI.xml
-/Sitecore/sitecore.nexus.dll
 Lucinq.Glass.SitecoreIntegration.v11.suo
 Lucinq.SitecoreIntegration.Sitecore7/buildnuget.bat
 Lucinq.GlassMapper.Sitecore/buildnuget.bat
+Sitecore7/Libraries/Sitecore/
+Sitecore7/Lucinq.GlassMapper.Sitecore/bin/
+Sitecore7/Lucinq.GlassMapper.Sitecore/obj/
+Sitecore7/Lucinq.Sitecore/bin/Debug/ComponentArt.Web.UI.dll
+Sitecore7/Lucinq.Sitecore/bin/
+Sitecore7/Lucinq.Sitecore/obj/
+Sitecore7/Lucinq.SitecoreIntegration.Sitecore7/bin/
+Sitecore7/Lucinq.SitecoreIntegration.Sitecore7/obj/
+Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin/Debug/Castle.Core.dll
+Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin/
+Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/obj/
+Sitecore7/Unit Tests/Lucinq.Sitecore.UnitTests/bin/
+Sitecore7/Unit Tests/Lucinq.Sitecore.UnitTests/obj/
+Sitecore7/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin/
+Sitecore7/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj/
