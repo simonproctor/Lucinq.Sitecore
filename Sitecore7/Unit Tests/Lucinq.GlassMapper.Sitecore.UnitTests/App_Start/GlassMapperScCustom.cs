@@ -15,10 +15,15 @@ namespace Lucinq.GlassMapper.Sitecore.UnitTests.App_Start
 			container.Install(new SitecoreInstaller(config));
 		}
 
-		public static IConfigurationLoader[] GlassLoaders(){
-			var attributes = new SitecoreAttributeConfigurationLoader("Lucinq.GlassMapper.Sitecore.UnitTests");
+		public static IConfigurationLoader[] GlassLoaders(){			
 			
-			return new IConfigurationLoader[]{attributes};
+			/* USE THIS AREA TO ADD FLUENT CONFIGURATION LOADERS
+             * 
+             * If you are using Attribute Configuration or automapping/on-demand mapping you don't need to do anything!
+             * 
+             */
+
+			return new IConfigurationLoader[]{};
 		}
 		public static void PostLoad(){
 			//Remove the comments to activate CodeFist
