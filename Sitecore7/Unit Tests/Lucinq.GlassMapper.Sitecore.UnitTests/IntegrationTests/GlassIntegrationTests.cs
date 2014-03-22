@@ -1,5 +1,6 @@
 ﻿using System;
 using Glass.Mapper;
+using Glass.Mapper.Configuration.Attributes;
 using Glass.Mapper.Sc;
 using Glass.Mapper.Sc.CastleWindsor;
 using Lucinq.GlassMapper.Sitecore.UnitTests.App_Start;
@@ -28,6 +29,9 @@ namespace Lucinq.GlassMapper.Sitecore.UnitTests.IntegrationTests
             var resolver = DependencyResolver.CreateStandardResolver();
             GlassMapperScCustom.CastleConfig(resolver.Container);
             _context = Context.Create(resolver);
+
+            var attributes = new AttributeConfigurationLoader("Lucinq.GlassMapper.Sitecore.UnitTests");
+            _context.Load(attributes);
             _context.Load(GlassMapperScCustom.GlassLoaders());
             GlassMapperScCustom.PostLoad();
             _context.Load();
