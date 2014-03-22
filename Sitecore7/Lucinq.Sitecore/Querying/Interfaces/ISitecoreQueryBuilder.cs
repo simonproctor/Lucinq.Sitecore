@@ -10,7 +10,7 @@ namespace Lucinq.SitecoreIntegration.Querying.Interfaces
 {
     public interface ISitecoreQueryBuilder : IQueryBuilder
     {
-		ISitecoreQueryBuilder Parent { get; }
+		new ISitecoreQueryBuilder Parent { get; }
 
         SitecoreMode SitecoreMode { get; }
 
