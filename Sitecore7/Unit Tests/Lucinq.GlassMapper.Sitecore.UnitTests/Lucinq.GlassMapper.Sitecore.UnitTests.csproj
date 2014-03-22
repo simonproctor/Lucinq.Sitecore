@@ -59,9 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.5175.26375, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.5194.19432, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lucinq-30.1.0.5175.26375\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\..\packages\Lucinq-30.1.1.1\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -71,11 +71,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="sitecore.nexus">
-      <HintPath>..\..\Libraries\Sitecore\sitecore.nexus.dll</HintPath>
+      <HintPath>..\..\..\Libraries\Sitecore7\sitecore.nexus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -100,53 +103,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App_Config\Commands.config" />
-    <None Include="App_Config\ConnectionStrings.config" />
-    <None Include="App_Config\ConnectionStringsOracle.config" />
-    <None Include="App_Config\FieldTypes.config" />
-    <None Include="App_Config\Icons.config" />
-    <None Include="App_Config\Include\DataFolder.config.example" />
-    <None Include="App_Config\Include\EventHandler.config.example" />
-    <None Include="App_Config\Include\ForwardingSecurityEvents.config.example" />
-    <None Include="App_Config\Include\ja-JP.config.example" />
-    <None Include="App_Config\Include\LiveMode.config.example" />
-    <None Include="App_Config\Include\ScalabilitySettings.config.example" />
-    <None Include="App_Config\Include\Sitecore.AntiCsrf.config" />
-    <None Include="App_Config\Include\Sitecore.Buckets.config" />
-    <None Include="App_Config\Include\Sitecore.Buckets.Scaling.config.example" />
-    <None Include="App_Config\Include\Sitecore.Buckets.WarmupQueries.config.example" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.DefaultIndexConfiguration.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Core.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Master.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Web.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Core.config.example" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Master.config.example" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Web.config.example" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucinq.Index.Master.config" />
-    <None Include="App_Config\Include\Sitecore.ContentSearch.VerboseLogging.config.example" />
-    <None Include="App_Config\Include\Sitecore.Mvc.config" />
-    <None Include="App_Config\Include\Sitecore.MvcAnalytics.config.disabled" />
-    <None Include="App_Config\Include\Sitecore.MvcExperienceEditor.config" />
-    <None Include="App_Config\Include\Sitecore.MvcSimulator.config" />
-    <None Include="App_Config\Include\Sitecore.PipelineProfiling.config.disabled" />
-    <None Include="App_Config\Include\Sitecore.Shell.MarketingAutomation.config" />
-    <None Include="App_Config\Include\Sitecore.WebDAV.config" />
-    <None Include="App_Config\Include\SitecoreSettings.config.example" />
-    <None Include="App_Config\Include\SiteDefinition.config.example" />
-    <None Include="App_Config\Include\WebDeploy.config.example" />
-    <None Include="App_Config\Include\XslExtension.config.example" />
-    <None Include="App_Config\LanguageDefinitions.config" />
-    <None Include="App_Config\MimeTypes.config" />
-    <None Include="App_Config\Portraits.config" />
-    <None Include="App_Config\Prefetch\Common.config" />
-    <None Include="App_Config\Prefetch\Core.config" />
-    <None Include="App_Config\Prefetch\Master.config" />
-    <None Include="App_Config\Prefetch\Web.config" />
-    <None Include="App_Config\Prototypes.config" />
-    <None Include="App_Config\Security\Domains.config" />
-    <None Include="App_Config\Security\GlobalRoles.config" />
-    <None Include="App_Config\XamlSharp.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +117,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>$(MSBuildProjectDir)..\..\..\config\copytoproject.bat $(MSBuildProjectDir)..\..\</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

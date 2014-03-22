@@ -60,23 +60,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.5175.26375, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.5194.19432, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Lucinq-30.1.0.5175.26375\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\packages\Lucinq-30.1.1.1\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\Libraries\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="sitecore.nexus">
-      <HintPath>..\Libraries\Sitecore\sitecore.nexus.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\sitecore.nexus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -99,8 +98,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
-    <None Include="App_Config\Include\Glass.Mapper.Sc.Mvc.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

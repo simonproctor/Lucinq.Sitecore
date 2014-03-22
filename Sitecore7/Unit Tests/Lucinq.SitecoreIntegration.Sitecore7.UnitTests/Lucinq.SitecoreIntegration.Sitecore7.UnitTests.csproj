@@ -38,37 +38,33 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.5175.26375, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.5194.19432, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lucinq-30.1.0.5175.26375\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\..\packages\Lucinq-30.1.1.1\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch">
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Client">
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.ContentSearch.Client.dll</HintPath>
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch.Linq">
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.Linq.Lucene, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
     </Reference>
-    <Reference Include="Sitecore.ContentSearch.LuceneProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
+    <Reference Include="Sitecore.ContentSearch.LuceneProvider">
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\..\Libraries\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\..\Libraries\Sitecore7\Sitecore.Kernel.dll</HintPath>
     </Reference>
-    <Reference Include="sitecore.nexus, Version=1.0.0.4404, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Sitecore\sitecore.nexus.dll</HintPath>
+    <Reference Include="sitecore.nexus">
+      <HintPath>..\..\..\Libraries\Sitecore7\sitecore.nexus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -84,147 +80,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App_Config\Commands.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\ConnectionStrings.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\ConnectionStringsOracle.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\FieldTypes.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Icons.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\DataFolder.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\EventHandler.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\ForwardingSecurityEvents.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\ja-JP.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\LiveMode.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\ScalabilitySettings.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.AntiCsrf.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.Buckets.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.Buckets.Scaling.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.Buckets.WarmupQueries.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.DefaultIndexConfiguration.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Core.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Master.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Index.Web.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Core.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Master.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucene.Indexes.Sharded.Web.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.Lucinq.Index.Master.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.ContentSearch.VerboseLogging.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.Mvc.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.MvcAnalytics.config.disabled">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.MvcExperienceEditor.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.MvcSimulator.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.PipelineProfiling.config.disabled">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.Shell.MarketingAutomation.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\Sitecore.WebDAV.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\SitecoreSettings.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\SiteDefinition.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\WebDeploy.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Include\XslExtension.config.example">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\LanguageDefinitions.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\MimeTypes.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Portraits.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Prefetch\Common.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Prefetch\Core.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Prefetch\Master.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Prefetch\Web.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Prototypes.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Security\Domains.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\Security\GlobalRoles.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\XamlSharp.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +94,9 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(MSBuildProjectDir)..\..\..\config\copytoproject.bat $(MSBuildProjectDir)..\..\</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

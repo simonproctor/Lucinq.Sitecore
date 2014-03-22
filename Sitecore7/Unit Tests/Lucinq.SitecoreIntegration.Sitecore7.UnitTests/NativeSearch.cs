@@ -186,7 +186,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
             var result = sitecoreSearch.Execute(queryBuilder);
             Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
-            foreach (var searchResultItem in result.GetPagedItems(0, 50))
+            foreach (var searchResultItem in result.GetRange(0, 50))
             {
                 if (!showOutput)
                 {
@@ -207,7 +207,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
             var result = sitecoreSearch.Execute(queryBuilder);
             Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
-            foreach (var searchResultItem in result.GetPagedItems(0, 50))
+            foreach (var searchResultItem in result.GetRange(0, 50))
             {
                 Console.WriteLine(searchResultItem.Name);
             }
@@ -223,7 +223,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
             var result = undisposedSitecoreSearch.Execute(queryBuilder);
             Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
-            foreach (var searchResultItem in result.GetPagedItems(0, 50))
+            foreach (var searchResultItem in result.GetRange(0, 50))
             {
                 Console.WriteLine(searchResultItem.Name);
             }

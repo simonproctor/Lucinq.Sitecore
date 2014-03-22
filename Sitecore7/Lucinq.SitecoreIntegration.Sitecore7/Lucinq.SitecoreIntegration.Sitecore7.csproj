@@ -38,30 +38,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucinq, Version=1.0.5175.26375, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lucinq, Version=1.0.5194.19432, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Lucinq-30.1.0.5175.26375\lib\net40\Lucinq.dll</HintPath>
+      <HintPath>..\packages\Lucinq-30.1.1.1\lib\net40\Lucinq.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Client">
-      <HintPath>..\Libraries\Sitecore\Sitecore.Client.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.Client.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch">
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Client">
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.Client.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Client.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Linq">
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.Linq.Lucene">
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.Linq.Lucene.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.ContentSearch.LuceneProvider">
-      <HintPath>..\Libraries\Sitecore\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.ContentSearch.LuceneProvider.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\Libraries\Sitecore\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\..\Libraries\Sitecore7\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -195,7 +195,7 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.Extensions
         #region [ Sorting ]
 
         public static IQueryBuilder Sort<T>(this ISitecoreQueryBuilder queryBuilder, Expression<Func<T, object>> expression,
-            bool sortDescending = false, int? sortType = null)
+            bool sortDescending = false, SortType sortType = SortType.String)
         {
             return queryBuilder.Sort(GetFieldName(expression), sortDescending, sortType);
         }

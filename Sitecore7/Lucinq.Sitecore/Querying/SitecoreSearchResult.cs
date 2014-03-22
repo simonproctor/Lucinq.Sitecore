@@ -5,13 +5,14 @@ using Lucinq.Interfaces;
 using Lucinq.Querying;
 using Lucinq.SitecoreIntegration.Constants;
 using Lucinq.SitecoreIntegration.DatabaseManagement.Interfaces;
+using Lucinq.SitecoreIntegration.Querying.Interfaces;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 
 namespace Lucinq.SitecoreIntegration.Querying
 {
-	public class SitecoreSearchResult : ItemSearchResult<Item>
+	public class SitecoreSearchResult : ItemSearchResult<Item>, ISitecoreSearchResult
 	{
 		#region [ Constructors ]
 

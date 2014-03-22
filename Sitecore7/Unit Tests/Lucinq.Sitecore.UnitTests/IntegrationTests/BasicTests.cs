@@ -45,7 +45,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -75,7 +75,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -99,7 +99,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 20);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 20);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -123,7 +123,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -149,7 +149,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -171,7 +171,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 100);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -209,7 +209,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             SitecoreSearchResult sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 100);
+			var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 100);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -235,7 +235,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 10);
+            var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 10);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -285,7 +285,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+            var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 9);
 
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
 
@@ -310,7 +310,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+            var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 9);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -333,7 +333,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 			Assert.Greater(sitecoreSearchResult.TotalHits, 0);
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+            var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 9);
 
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
@@ -376,15 +376,15 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 
             var sitecoreSearchResult = search.Execute(queryBuilder);
 
-			var sitecoreItemResult = sitecoreSearchResult.GetPagedItems(0, 9);
+            var sitecoreItemResult = sitecoreSearchResult.GetRange(0, 9);
 
 			Assert.AreEqual(10, sitecoreItemResult.Items.Count);
 
-			var sitecoreItemResult2 = sitecoreSearchResult.GetPagedItems(0, 19);
+            var sitecoreItemResult2 = sitecoreSearchResult.GetRange(0, 19);
 
 			Assert.AreEqual(20, sitecoreItemResult2.Items.Count);
 
-			var sitecoreItemResult3 = sitecoreSearchResult.GetPagedItems(10, 29);
+            var sitecoreItemResult3 = sitecoreSearchResult.GetRange(10, 29);
 
 			Assert.AreEqual(20, sitecoreItemResult3.Items.Count);
 		}

@@ -71,7 +71,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
         /// </summary>
         /// <param name="document"></param>
         /// <param name="item"></param>
-        protected void AddLucinqFields(Document document, Item item)
+        public void AddLucinqFields(Document document, Item item)
         {
             StringBuilder templatePathBuilder = new StringBuilder();
             AddTemplatePath(item.Template, templatePathBuilder);
@@ -132,7 +132,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
             }
         }
 
-        protected virtual void AddField(Document document, Field field)
+        public virtual void AddField(Document document, Field field)
         {
             string fieldType = "value";
             string fieldTypeKey = field.TypeKey.ToLower();

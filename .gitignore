@@ -1,31 +1,6 @@
-.svn
-Lucinq.Sitecore/obj
-Lucinq.Sitecore/bin
-Lucinq.GlassMapper.Sitecore/obj
-Lucinq.GlassMapper.Sitecore/bin
-Unit Tests/Lucinq.Sitecore.UnitTests/obj
-Unit Tests/Lucinq.Sitecore.UnitTests/bin
-Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/obj
-Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin
-Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj
-Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin
-Lucinq.SitecoreIntegration.Sitecore7/obj
-Lucinq.SitecoreIntegration.Sitecore7/bin
-Lucinq.Glass.SitecoreIntegration.v11.suo
-Lucinq.SitecoreIntegration.Sitecore7/buildnuget.bat
-Lucinq.GlassMapper.Sitecore/buildnuget.bat
-Sitecore7/Libraries/Sitecore/
-Sitecore7/Lucinq.GlassMapper.Sitecore/bin/
-Sitecore7/Lucinq.GlassMapper.Sitecore/obj/
-Sitecore7/Lucinq.Sitecore/bin/Debug/ComponentArt.Web.UI.dll
-Sitecore7/Lucinq.Sitecore/bin/
-Sitecore7/Lucinq.Sitecore/obj/
-Sitecore7/Lucinq.SitecoreIntegration.Sitecore7/bin/
-Sitecore7/Lucinq.SitecoreIntegration.Sitecore7/obj/
-Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin/Debug/Castle.Core.dll
-Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/bin/
-Sitecore7/Unit Tests/Lucinq.GlassMapper.Sitecore.UnitTests/obj/
-Sitecore7/Unit Tests/Lucinq.Sitecore.UnitTests/bin/
-Sitecore7/Unit Tests/Lucinq.Sitecore.UnitTests/obj/
-Sitecore7/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/bin/
-Sitecore7/Unit Tests/Lucinq.SitecoreIntegration.Sitecore7.UnitTests/obj/
+**/obj
+**/bin
+**/libraries/sitecore*/*.dll
+**/libraries/sitecore*/*.lic
+**/libraries/sitecore*/*.xml
+/sitecore*/Unit Tests/Indexes/**
