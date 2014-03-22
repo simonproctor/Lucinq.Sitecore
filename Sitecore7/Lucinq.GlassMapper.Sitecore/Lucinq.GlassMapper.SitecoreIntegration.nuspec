@@ -15,7 +15,6 @@
     <tags>glass.sitecore.mapper glass mapper lucene.net lucene sitecore lucinq text search information retrieval query</tags>
     <dependencies>
         <dependency id="Lucinq.Sitecore7" version="1.1"/>
-        <dependency id="Lucene.Net" version="[3.0.3]"/>
         <dependency id="Glass.Mapper.Sc" version="3.0.0"/>
     </dependencies>
   </metadata>
