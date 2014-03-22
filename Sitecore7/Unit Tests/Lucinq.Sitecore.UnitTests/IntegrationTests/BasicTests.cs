@@ -104,7 +104,7 @@ namespace Lucinq.SitecoreIntegration.UnitTests.IntegrationTests
 			Console.WriteLine("Lucene Elapsed Time: {0}", sitecoreSearchResult.ElapsedTimeMs);
 			Console.WriteLine("Sitecore Elapsed Time: {0}", sitecoreItemResult.ElapsedTimeMs);
 
-			Assert.AreEqual(1, sitecoreItemResult.Items.Count);
+			Assert.AreEqual(2, sitecoreItemResult.Items.Count);
 
 			sitecoreItemResult.Items.ForEach(
 					item => Console.WriteLine(item.Name));
