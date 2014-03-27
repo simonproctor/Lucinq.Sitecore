@@ -22,6 +22,8 @@
   </metadata>
   <files>
 	<file src="bin\release\Lucinq.SitecoreIntegration.dll" target="lib\net40"/>
+	<file src="bin\release\Lucinq.SitecoreIntegration.Sitecore7.dll" target="lib\net40"/>
 	<file src="bin\release\Lucinq.SitecoreIntegration.dll" target="lib\net45"/>
+	<file src="bin\release\Lucinq.SitecoreIntegration.Sitecore7.dll" target="lib\net45"/>
   </files>
 </package>
