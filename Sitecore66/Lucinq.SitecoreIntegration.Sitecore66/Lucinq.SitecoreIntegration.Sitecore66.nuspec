@@ -18,10 +18,13 @@
     </dependencies>
     <references>
       <reference file="Lucinq.SitecoreIntegration.dll" />
+	  <reference file="Lucinq.SitecoreIntegration.Sitecore66.dll" />
     </references>
   </metadata>
   <files>
 	<file src="bin\release\Lucinq.SitecoreIntegration.dll" target="lib\net40"/>
+	<file src="bin\release\Lucinq.SitecoreIntegration.Sitecore66.dll" target="lib\net40"/>	
 	<file src="bin\release\Lucinq.SitecoreIntegration.dll" target="lib\net45"/>
+	<file src="bin\release\Lucinq.SitecoreIntegration.Sitecore66.dll" target="lib\net45"/>	
   </files>
 </package>

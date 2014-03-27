@@ -18,6 +18,7 @@
     </dependencies>
     <references>
       <reference file="Lucinq.SitecoreIntegration.dll" />
+	  <reference file="Lucinq.SitecoreIntegration.Sitecore7.dll" />
     </references>
   </metadata>
   <files>
