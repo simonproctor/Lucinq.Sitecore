@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomFields\TemplatePath.cs" />
     <Compile Include="Extensions\FieldExtensions.cs" />
     <Compile Include="Indexing\IndexOperations.cs" />
     <Compile Include="Indexing\LucinqIndex.cs" />
