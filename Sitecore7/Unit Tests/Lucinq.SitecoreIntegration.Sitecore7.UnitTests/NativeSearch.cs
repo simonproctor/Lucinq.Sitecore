@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using Lucene.Net.Store;
@@ -19,9 +20,12 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
     public class NativeSearch
     {
         private SitecoreSearch sitecoreSearch;
+        private SitecoreSearch nativeSitecoreSearch;
+        private SitecoreSearch undisposedNativeSitecoreSearch;
         private SitecoreSearch undisposedSitecoreSearch;
         private static ID makesPageId = new ID("{CF059C5C-DE5B-4C6B-9794-C00CE5A5F140}");
         private FSDirectory directory;
+        private FSDirectory undisposeDirectory;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
@@ -29,9 +33,13 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Sitecore.Configuration.State.HttpRuntime.AppDomainAppPath = Directory.GetCurrentDirectory();
             CorePipeline.Run("initialize", new PipelineArgs());
             Console.WriteLine("Initialized");
-            sitecoreSearch = new SitecoreSearch(Sitecore.Configuration.Settings.IndexFolder + "\\lucinq_master_index", new DatabaseHelper("master"));
-            directory = FSDirectory.Open(Sitecore.Configuration.Settings.IndexFolder + "\\lucinq_master_index");
-            undisposedSitecoreSearch = new SitecoreSearch(directory, new DatabaseHelper("master"));
+            sitecoreSearch = new SitecoreSearch(ConfigurationManager.AppSettings["IndexFolderPath"] + "\\lucinq_master_index", new DatabaseHelper("web"));
+            directory = FSDirectory.Open(ConfigurationManager.AppSettings["IndexFolderPath"] + "\\lucinq_master_index");
+            undisposedSitecoreSearch = new SitecoreSearch(directory, new DatabaseHelper("web"));
+
+            nativeSitecoreSearch = new SitecoreSearch(ConfigurationManager.AppSettings["IndexFolderPath"] + "\\lucinqnative_master_index", new DatabaseHelper("web"));
+            undisposeDirectory = FSDirectory.Open(ConfigurationManager.AppSettings["IndexFolderPath"] + "\\lucinqnative_master_index");
+            undisposedNativeSitecoreSearch = new SitecoreSearch(undisposeDirectory, new DatabaseHelper("web"));
         }
 
         [TestFixtureTearDown]
@@ -118,26 +126,54 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Console.WriteLine("Right.... GO!!");
             GetLucinqProperResults("Ford", false);
             GetSitecoreResults("Ford", false);
+            GetLucinqNativeIndexProperResults("ford", false);
+            GetLucinqProperUndisposedResults("Ford", false);
+
             GetLucinqProperResults("Volkswagen", false);
             GetSitecoreResults("Volkswagen", false);
+            GetLucinqNativeIndexProperResults("Volkswagen", false);
+            GetLucinqProperUndisposedResults("Volkswagen", false);
+
             GetLucinqProperResults("Mazda", false);
             GetSitecoreResults("Mazda", false);
+            GetLucinqNativeIndexProperResults("Mazda", false);
+            GetLucinqProperUndisposedResults("Mazda", false);
+
             GetLucinqProperResults("Audi", false);
             GetSitecoreResults("Audi", false);
+            GetLucinqNativeIndexProperResults("Audi", false);
+            GetLucinqProperUndisposedResults("Audi", false);
+
             GetLucinqProperResults("Bmw", false);
             GetSitecoreResults("Bmw", false);
+            GetLucinqNativeIndexProperResults("Bmw", false);
+            GetLucinqProperUndisposedResults("Bmw", false);
 
-            Console.WriteLine("Right.... Pass 2!!");
+            Console.WriteLine("****** Right.... Pass 2!!\r\n");
             GetLucinqProperResults("Ford", false);
             GetSitecoreResults("Ford", false);
+            GetLucinqNativeIndexProperResults("ford", false);
+            GetLucinqProperUndisposedResults("Ford", false);
+
             GetLucinqProperResults("Volkswagen", false);
             GetSitecoreResults("Volkswagen", false);
+            GetLucinqNativeIndexProperResults("Volkswagen", false);
+            GetLucinqProperUndisposedResults("Volkswagen", false);
+
             GetLucinqProperResults("Mazda", false);
             GetSitecoreResults("Mazda", false);
+            GetLucinqNativeIndexProperResults("Mazda", false);
+            GetLucinqProperUndisposedResults("Mazda", false);
+
             GetLucinqProperResults("Audi", false);
             GetSitecoreResults("Audi", false);
+            GetLucinqNativeIndexProperResults("Audi", false);
+            GetLucinqProperUndisposedResults("Audi", false);
+
             GetLucinqProperResults("Bmw", false);
             GetSitecoreResults("Bmw", false);
+            GetLucinqNativeIndexProperResults("Bmw", false);
+            GetLucinqProperUndisposedResults("Bmw", false);
         }
 
         [Test]
@@ -197,6 +233,47 @@ namespace Lucinq.SitecoreIntegration.Sitecore7.UnitTests
             Console.WriteLine("Done: {0}\r\n", stopWatch.ElapsedMilliseconds);
         }
 
+        private void GetLucinqProperUndisposedResults(string itemName, bool showOutput = true)
+        {
+            Console.WriteLine("Lucinq Undisposed:{0}", itemName);
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            SitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder(t => t.DescendantOf(SitecoreIds.HomeItemId), t => t.TemplateId(SitecoreIds.AdvertTemplateId));
+            queryBuilder.Term<SearchResultItem>(t => t.Name, itemName);
+            Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
+            var result = undisposedSitecoreSearch.Execute(queryBuilder);
+            Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
+            foreach (var searchResultItem in result.GetRange(0, 50))
+            {
+                if (!showOutput)
+                {
+                    continue;
+                }
+                Console.WriteLine(searchResultItem.Name);
+            }
+            Console.WriteLine("Done: {0}\r\n", stopWatch.ElapsedMilliseconds);
+        }
+
+        private void GetLucinqNativeIndexProperResults(string itemName, bool showOutput = true)
+        {
+            Console.WriteLine("Lucinq Native Index:{0}", itemName);
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            SitecoreQueryBuilder queryBuilder = new SitecoreQueryBuilder(t => t.DescendantOf(SitecoreIds.HomeItemId), t => t.TemplateId(SitecoreIds.AdvertTemplateId));
+            queryBuilder.Term<SearchResultItem>(t => t.Name, itemName);
+            Console.WriteLine("Query set up: {0}", stopWatch.ElapsedMilliseconds);
+            var result = nativeSitecoreSearch.Execute(queryBuilder);
+            Console.WriteLine("Total Search Results {0}: {1}", result.TotalHits, stopWatch.ElapsedMilliseconds);
+            foreach (var searchResultItem in result.GetRange(0, 50))
+            {
+                if (!showOutput)
+                {
+                    continue;
+                }
+                Console.WriteLine(searchResultItem.Name);
+            }
+            Console.WriteLine("Done: {0}\r\n", stopWatch.ElapsedMilliseconds);
+        }
 
         private void GetLucinqEquivalentResults(string itemName)
         {

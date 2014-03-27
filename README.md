@@ -7,7 +7,6 @@ existing lucene API, and keeping the abstraction to a minimum.
 
 For more information on the associated projects
 
-- https://github.com/cardinal252/Lucinq.Glass.Sitecore
 - https://github.com/cardinal252/Lucinq.Sitecore
 
 Features
@@ -19,10 +18,24 @@ Features
 - Query by (including but not limited to) - Name (including wildcards), Direct Template, Base Template, Ancestor, Parent, Language or any combination
 - Query manipulation - remove terms and re-run for example.
 
+Why Use Lucinq For Sitecore
+===========================
+
+- In short, its faster. Tested on the same index (containing 90,000 entries from a sitecore db of 264,0000 items). Lucinq returned results on average 25% faster with disposed indexes and 45% faster with undisposed indexes than the equivalent sitecore searches. This is including Lucinq having the actual Sitecore item (unlike Sitecore's which is re-populating POCOs from the index)
+- Quick and easy debugging - queryBuilder.Build().ToString() gives you the lucene query being executed whilst in debug.
+- Easier integration testing - Lucinq does not require the Sitecore initialize pipelines to have been run - simply the location of the index and the connection strings for the required db's
+- Can query by derived template (ie: get me all items inheriting from my SEO template).
+- Glass Mapper integration to return fully populated POCO's straight from the index using the Sitecore item's
+
+Coming Soon
+===========
+
+- Creating queries using the rules engine!
+
 Support
 =======
 
-Currently only supports Sitecore 6.6
+Currently Lucinq supports Sitecore 6.6 & 7.x. It could be made to support Sitecore 6.2 + with additional work.
 
 NuGet
 =====
@@ -31,8 +44,15 @@ Get it now from Nuget https://nuget.org/packages/Lucinq.SitecoreIntegration/
 
 PM> Install-Package Lucinq.SitecoreIntegration
 
+PM> Install-Package Lucinq.SitecoreIntegration.Glass
+
+
 Getting Started
 ===============
+
+Install the nuget package into your sitecore solution, if you are using sitecore 6.6 - you will need to configure the indexes, if Sitecore 7 you can use the default indexes (though it helps to uncomment the entry for _templates)
+
+If you wish to get the unit tests running:
 
 - Copy the binaries from sitecore to the /sitecore folder
 - Compile the project
