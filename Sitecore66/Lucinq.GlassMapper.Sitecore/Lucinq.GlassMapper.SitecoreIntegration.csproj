@@ -40,9 +40,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="Glass.Mapper, Version=3.0.11.23, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Glass.Mapper.3.0.11.23\lib\net45\Glass.Mapper.dll</HintPath>
@@ -50,10 +47,6 @@
     <Reference Include="Glass.Mapper.Sc, Version=3.1.9.30, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Glass.Mapper.Sc.3.1.9.30\lib\net45\Glass.Mapper.Sc.dll</HintPath>
-    </Reference>
-    <Reference Include="Glass.Mapper.Sc.CastleWindsor, Version=3.1.5.16, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Glass.Mapper.Sc.CastleWindsor.3.1.5.16\lib\net45\Glass.Mapper.Sc.CastleWindsor.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -88,8 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\GlassMapperSc.cs" />
-    <Compile Include="App_Start\GlassMapperScCustom.cs" />
     <Compile Include="Extensions\GlassSitecoreExtensions.cs" />
     <Compile Include="GlassSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
