@@ -1,15 +1,44 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sitecore 7", "Sitecore 7", "{41F697A0-9BC4-4069-9D40-4B7EE0B9B345}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.Sitecore7", "Lucinq.Sitecore\Sitecore7\Lucinq.Sitecore7.csproj", "{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sitecore 6.6", "Sitecore 6.6", "{7C068641-8CBA-4436-89A5-141CDE88F37A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.Sitecore66", "Lucinq.Sitecore\Sitecore66\Lucinq.Sitecore66.csproj", "{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration", "Sitecore66\Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj", "{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8} = {D688BADD-CE61-40A0-BC5A-ADB11B0581D8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration", "Sitecore7\Lucinq.Sitecore\Lucinq.SitecoreIntegration.csproj", "{D688BADD-CE61-40A0-BC5A-ADB11B0581D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.Sitecore66", "Sitecore66\Lucinq.SitecoreIntegration.Sitecore66\Lucinq.SitecoreIntegration.Sitecore66.csproj", "{9E7A71CE-F3CC-45F1-B56B-689E35C2E127}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.Sitecore7", "Sitecore7\Lucinq.SitecoreIntegration.Sitecore7\Lucinq.SitecoreIntegration.Sitecore7.csproj", "{70B05F22-0E71-4A78-AAEC-9B66126AD232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.GlassMapper.SitecoreIntegration", "Sitecore66\Lucinq.GlassMapper.Sitecore\Lucinq.GlassMapper.SitecoreIntegration.csproj", "{0DBDAE07-AF06-4657-8E18-FA2CF3F06791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.GlassMapper.SitecoreIntegration", "Sitecore7\Lucinq.GlassMapper.Sitecore\Lucinq.GlassMapper.SitecoreIntegration.csproj", "{F2AC6BCC-083D-460D-B871-9734A7214C62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D23C4555-7E59-41CF-97B4-1C2EAF76C9EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7C5FA405-3687-452C-AD23-874387A86EFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.Sitecore66.UnitTests", "Sitecore66\Unit Tests\Lucinq.SitecoreIntegration.Sitecore66.UnitTests\Lucinq.SitecoreIntegration.Sitecore66.UnitTests.csproj", "{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.UnitTests", "Sitecore7\Unit Tests\Lucinq.Sitecore.UnitTests\Lucinq.SitecoreIntegration.UnitTests.csproj", "{0AE88B71-92F2-440D-8812-B9199401A09B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.Sitecore7.UnitTests", "Sitecore7\Unit Tests\Lucinq.SitecoreIntegration.Sitecore7.UnitTests\Lucinq.SitecoreIntegration.Sitecore7.UnitTests.csproj", "{20DE05F2-5D53-445D-BC56-5B234BF553BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated", "Generated", "{5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.IntegrationTests", "Sitecore7\Unit Tests\Lucinq.Sitecore.IntegrationTests\Lucinq.SitecoreIntegration.IntegrationTests.csproj", "{362A912D-3ED2-48E6-936F-C0F6AF0FBB63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.IntegrationTests", "Sitecore66\Unit Tests\Lucinq.SitecoreIntegration.IntegrationTests\Lucinq.SitecoreIntegration.IntegrationTests.csproj", "{60CC5496-B514-4C76-B992-20D2E252F095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucinq.SitecoreIntegration.UnitTests", "Sitecore66\Unit Tests\Lucinq.SitecoreIntegration.UnitTests\Lucinq.SitecoreIntegration.UnitTests.csproj", "{84C1B842-27B6-45ED-8063-1A27D687E1BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,20 +46,73 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E7A71CE-F3CC-45F1-B56B-689E35C2E127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E7A71CE-F3CC-45F1-B56B-689E35C2E127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E7A71CE-F3CC-45F1-B56B-689E35C2E127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E7A71CE-F3CC-45F1-B56B-689E35C2E127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B05F22-0E71-4A78-AAEC-9B66126AD232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B05F22-0E71-4A78-AAEC-9B66126AD232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B05F22-0E71-4A78-AAEC-9B66126AD232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B05F22-0E71-4A78-AAEC-9B66126AD232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DBDAE07-AF06-4657-8E18-FA2CF3F06791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DBDAE07-AF06-4657-8E18-FA2CF3F06791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DBDAE07-AF06-4657-8E18-FA2CF3F06791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DBDAE07-AF06-4657-8E18-FA2CF3F06791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2AC6BCC-083D-460D-B871-9734A7214C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AC6BCC-083D-460D-B871-9734A7214C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AC6BCC-083D-460D-B871-9734A7214C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AC6BCC-083D-460D-B871-9734A7214C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AE88B71-92F2-440D-8812-B9199401A09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AE88B71-92F2-440D-8812-B9199401A09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AE88B71-92F2-440D-8812-B9199401A09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AE88B71-92F2-440D-8812-B9199401A09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20DE05F2-5D53-445D-BC56-5B234BF553BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20DE05F2-5D53-445D-BC56-5B234BF553BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20DE05F2-5D53-445D-BC56-5B234BF553BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20DE05F2-5D53-445D-BC56-5B234BF553BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{362A912D-3ED2-48E6-936F-C0F6AF0FBB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{362A912D-3ED2-48E6-936F-C0F6AF0FBB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{362A912D-3ED2-48E6-936F-C0F6AF0FBB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{362A912D-3ED2-48E6-936F-C0F6AF0FBB63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60CC5496-B514-4C76-B992-20D2E252F095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60CC5496-B514-4C76-B992-20D2E252F095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60CC5496-B514-4C76-B992-20D2E252F095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60CC5496-B514-4C76-B992-20D2E252F095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C1B842-27B6-45ED-8063-1A27D687E1BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C1B842-27B6-45ED-8063-1A27D687E1BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C1B842-27B6-45ED-8063-1A27D687E1BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C1B842-27B6-45ED-8063-1A27D687E1BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E93C30B1-5AFA-44DA-B5EA-783B386B0E6B} = {41F697A0-9BC4-4069-9D40-4B7EE0B9B345}
-		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6} = {7C068641-8CBA-4436-89A5-141CDE88F37A}
+		{DDD54B05-9498-4A96-BBDC-8563F4FA44B6} = {5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79}
+		{D688BADD-CE61-40A0-BC5A-ADB11B0581D8} = {41F697A0-9BC4-4069-9D40-4B7EE0B9B345}
+		{9E7A71CE-F3CC-45F1-B56B-689E35C2E127} = {7C068641-8CBA-4436-89A5-141CDE88F37A}
+		{70B05F22-0E71-4A78-AAEC-9B66126AD232} = {41F697A0-9BC4-4069-9D40-4B7EE0B9B345}
+		{0DBDAE07-AF06-4657-8E18-FA2CF3F06791} = {5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79}
+		{F2AC6BCC-083D-460D-B871-9734A7214C62} = {41F697A0-9BC4-4069-9D40-4B7EE0B9B345}
+		{D23C4555-7E59-41CF-97B4-1C2EAF76C9EC} = {7C068641-8CBA-4436-89A5-141CDE88F37A}
+		{7C5FA405-3687-452C-AD23-874387A86EFF} = {41F697A0-9BC4-4069-9D40-4B7EE0B9B345}
+		{E212CFF8-FE2C-4989-8CEA-D4374F1EF0D2} = {D23C4555-7E59-41CF-97B4-1C2EAF76C9EC}
+		{0AE88B71-92F2-440D-8812-B9199401A09B} = {7C5FA405-3687-452C-AD23-874387A86EFF}
+		{20DE05F2-5D53-445D-BC56-5B234BF553BD} = {7C5FA405-3687-452C-AD23-874387A86EFF}
+		{5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79} = {7C068641-8CBA-4436-89A5-141CDE88F37A}
+		{362A912D-3ED2-48E6-936F-C0F6AF0FBB63} = {7C5FA405-3687-452C-AD23-874387A86EFF}
+		{60CC5496-B514-4C76-B992-20D2E252F095} = {5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79}
+		{84C1B842-27B6-45ED-8063-1A27D687E1BD} = {5591FA4C-5E13-4CD2-AABE-04C0D3B8EF79}
 	EndGlobalSection
 EndGlobal

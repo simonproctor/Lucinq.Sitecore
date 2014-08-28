@@ -95,7 +95,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
         /// </summary>
         /// <param name="document"></param>
         /// <param name="item"></param>
-        protected virtual void AddCustomFields(Document document, Item item)
+        public virtual void AddCustomFields(Document document, Item item)
         {
             // Placeholder method to add additional fields specific to the implementation
         }
@@ -114,7 +114,7 @@ namespace Lucinq.SitecoreIntegration.Indexing
             AddItemPath(item.Parent, stringBuilder);
         }
 
-        protected virtual void AddTemplatePath(TemplateItem templateItem, StringBuilder stringBuilder)
+        public virtual void AddTemplatePath(TemplateItem templateItem, StringBuilder stringBuilder)
         {
             if (templateItem.ID == Sitecore.TemplateIDs.StandardTemplate)
             {
