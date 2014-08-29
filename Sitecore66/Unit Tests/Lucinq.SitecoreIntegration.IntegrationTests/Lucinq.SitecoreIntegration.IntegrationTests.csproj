@@ -43,17 +43,14 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper, Version=3.0.11.23, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Glass.Mapper.3.0.11.23\lib\net45\Glass.Mapper.dll</HintPath>
+    <Reference Include="Glass.Mapper">
+      <HintPath>..\..\..\packages\Glass.Mapper.3.0.12.24\lib\net45\Glass.Mapper.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc, Version=3.1.9.30, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Glass.Mapper.Sc.3.1.9.30\lib\net45\Glass.Mapper.Sc.dll</HintPath>
+    <Reference Include="Glass.Mapper.Sc">
+      <HintPath>..\..\..\packages\Glass.Mapper.Sc.3.2.1.42\lib\net45\Glass.Mapper.Sc.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc.CastleWindsor, Version=3.1.5.16, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Glass.Mapper.Sc.CastleWindsor.3.1.5.16\lib\net45\Glass.Mapper.Sc.CastleWindsor.dll</HintPath>
+    <Reference Include="Glass.Mapper.Sc.CastleWindsor">
+      <HintPath>..\..\..\packages\Glass.Mapper.Sc.CastleWindsor.3.2.0.20\lib\net45\Glass.Mapper.Sc.CastleWindsor.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -119,7 +116,6 @@
     <None Include="App_Config\Include\EventHandler.config.example" />
     <None Include="App_Config\Include\ForwardingSecurityEvents.config.example" />
     <None Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
-    <None Include="App_Config\Include\Glass.Mapper.Sc.Mvc.config" />
     <None Include="App_Config\Include\ja-JP.config.example" />
     <None Include="App_Config\Include\LiveMode.config.example" />
     <None Include="App_Config\Include\ScalabilitySettings.config.example" />
